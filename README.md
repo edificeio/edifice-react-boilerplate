@@ -34,13 +34,13 @@ cd blog
 Install dependencies.
 
 ```bash
-npm install
+yarn
 ```
 
 Open your project with Vite Server + HMR at <http://localhost:8080>.
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 ## Dev
@@ -93,33 +93,33 @@ Add your new path to `tsconfig.json`:
 ### Lint
 
 ```bash
-npm run lint
+yarn lint
 ```
 
 ### Prettier
 
 ```bash
-npm run prettier:write
-npm run prettier:check
+yarn prettier:write
+yarn prettier:check
 ```
+
 
 ### Lighthouse
 
 > LHCI will check if your app respect at least 90% of these categories: performance, a11y, Best practices and seo
 
 ```bash
-npm run lighthouse
+yarn lighthouse
 ```
 
 ### Pre-commit
 
-When committing your work, `pre-commit` will start `npm run lint-staged`:
+When committing your work, `pre-commit` will start `yarn lint-staged`:
 
 > lint-staged starts lint + prettier
 
 ```bash
-npm run pre-commit
-lhci autorun
+yarn pre-commit
 ```
 
 ## Build
@@ -127,13 +127,13 @@ lhci autorun
 TypeScript check + Vite Build
 
 ```bash
-npm run build
+yarn build
 ```
 
 ## Preview
 
 ```bash
-npm run preview
+yarn preview
 ```
 
 ## License
