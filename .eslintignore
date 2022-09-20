@@ -1,0 +1,5 @@
+.prettierrc
+vite.config.ts
+node_modules
+public
+index.html
