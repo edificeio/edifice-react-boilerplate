@@ -1,6 +1,6 @@
 {
   "name": "ode-react-boilerplate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Open Digital Education React + Vite boilerplate",
   "scripts": {
     "clean": "concurrently \"yarn:clean:*\"",

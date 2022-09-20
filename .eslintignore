@@ -1,5 +1,6 @@
-.prettierrc
-vite.config.ts
-node_modules
-public
-index.html
+# Ignore everything:
+/*
+src/vite-env.d.ts
+
+# Except web-app:
+!/src
