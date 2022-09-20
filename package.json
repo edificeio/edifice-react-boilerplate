@@ -1,6 +1,6 @@
 {
   "name": "ode-react-boilerplate",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Open Digital Education React + Vite boilerplate",
   "scripts": {
     "clean": "concurrently \"yarn:clean:*\"",
@@ -13,9 +13,10 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prettier": "concurrently \"npm:prettier:*\"",
+    "prettier": "concurrently \"yarn:prettier:*\"",
     "prettier:write": "npx prettier --write .",
-    "prettier:check": "npx prettier --check ."
+    "prettier:check": "npx prettier --check .",
+    "lighthouse": "yarn clean:lighthouse && lhci autorun"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@lhci/cli": "0.9.x",
     "@types/node": "^18.6.1",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
