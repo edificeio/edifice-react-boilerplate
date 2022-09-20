@@ -3,7 +3,7 @@
   "version": "0.0.6",
   "description": "Open Digital Education React + Vite boilerplate",
   "scripts": {
-    "clean": "concurrently \"yarn:clean:*\"",
+    "clean": "concurrently \"npm:clean:*\"",
     "clean:modules": "rm -rf node_modules",
     "clean:package": "rm -rf package-lock.json",
     "clean:lighthouse": "rm -rf .lighthouseci",
@@ -13,10 +13,10 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prettier": "concurrently \"yarn:prettier:*\"",
+    "prettier": "concurrently \"npm:prettier:*\"",
     "prettier:write": "npx prettier --write .",
     "prettier:check": "npx prettier --check .",
-    "lighthouse": "yarn clean:lighthouse && lhci autorun",
+    "lighthouse": "npm run clean:lighthouse && lhci autorun",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
@@ -60,8 +60,8 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn prettier:write",
-      "yarn lint:fix"
+      "npm run prettier:write",
+      "npm run lint:fix"
     ]
   },
   "husky": {
