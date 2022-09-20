@@ -1,6 +1,6 @@
 {
   "name": "ode-react-boilerplate",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "Open Digital Education React + Vite boilerplate",
   "scripts": {
     "build": "tsc && vite build",
@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/opendigitaleducation/ode-react-boilerplate#readme",
   "dependencies": {
+    "clsx": "^1.2.1",
     "i18next-browser-languagedetector": "^6.1.5",
     "i18next-http-backend": "^1.4.1",
     "i18next": "^21.9.0",
