@@ -9,11 +9,9 @@ Many tools are already configured like:
 - [ReactJS](https://reactjs.org)
 - [Vite](https://vitejs.dev)
 - [TypeScript](https://www.typescriptlang.org)
-- [React i18next](https://react.i18next.com/)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
-- [Husky](https://github.com/typicode/husky)
-- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
+- [...](./TOOLS.md)
+
+[See all tools](./TOOLS.md)
 
 ## Getting Started
 
@@ -31,19 +29,32 @@ Go to the project directory.
 cd blog
 ```
 
-Install dependencies.
+Git init, commit and push to remote repository
+
+```bash
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:<ORG>/<app>.git
+git push -u origin main
+```
+
+Install all dependencies.
 
 ```bash
 yarn
 ```
+
+## Dev
+
+### Start project
 
 Open your project with Vite Server + HMR at <http://localhost:8080>.
 
 ```bash
 yarn dev
 ```
-
-## Dev
 
 ### [Server Options](https://vitejs.dev/config/server-options.html)
 
@@ -98,11 +109,18 @@ yarn lint
 
 ### Prettier
 
+Prettier write and check separately
+
 ```bash
-yarn prettier:write
-yarn prettier:check
+yarn pretty:write
+yarn pretty:check
 ```
 
+Prettier everything once
+
+```bash
+yarn pretty
+```
 
 ### Lighthouse
 
