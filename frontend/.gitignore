@@ -25,3 +25,6 @@ dist-ssr
 
 # Google Lighthouse
 .lighthouseci
+
+# Ignore VSCode folder
+.vscode

@@ -20,14 +20,14 @@
     "clean:modules": "rm -rf node_modules",
     "clean:package": "rm -rf yarn.lock",
     "dev": "vite",
+    "fix": "eslint --fix .",
+    "format": "concurrently \"yarn:format:*\"",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
     "lighthouse": "yarn clean:lighthouse && lhci autorun",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
     "pre-commit": "lint-staged",
-    "prepare": "husky install",
-    "pretty": "concurrently \"yarn:pretty:*\"",
-    "pretty:check": "yarn prettier --check .",
-    "pretty:write": "yarn prettier --write .",
+    "prepare": "cd .. && husky install frontend/.husky",
     "preview": "vite preview"
   },
   "husky": {
@@ -36,16 +36,22 @@
     }
   },
   "lint-staged": {
+    "gitDir": "../",
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn pretty:write",
-      "yarn lint:fix"
+      "yarn format:write",
+      "yarn fix"
     ]
   },
   "dependencies": {
+    "@ode-react-ui/advanced": "latest",
+    "@ode-react-ui/core": "latest",
+    "@ode-react-ui/hooks": "latest",
+    "@ode-react-ui/icons": "latest",
     "clsx": "1.2.1",
     "i18next": "21.9.2",
     "i18next-browser-languagedetector": "6.1.5",
     "i18next-http-backend": "1.4.4",
+    "ode-ts-client": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-error-boundary": "3.1.4",

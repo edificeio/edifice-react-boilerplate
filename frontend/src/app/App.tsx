@@ -1,5 +1,5 @@
+import Header from "@components/Header";
 import clsx from "clsx";
-import Header from "components/Header";
 import { useTranslation } from "react-i18next";
 
 function App() {
