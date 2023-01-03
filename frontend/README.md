@@ -43,7 +43,7 @@ git push -u origin main
 Install all dependencies.
 
 ```bash
-yarn
+pnpm install
 ```
 
 ## Dev
@@ -53,7 +53,7 @@ yarn
 Open your project with Vite Server + HMR at <http://localhost:8080>.
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 ### [Server Options](https://vitejs.dev/config/server-options.html)
@@ -104,7 +104,7 @@ Add your new path to `tsconfig.json`:
 ### Lint
 
 ```bash
-yarn lint
+pnpm lint
 ```
 
 ### Prettier
@@ -112,14 +112,14 @@ yarn lint
 Prettier write and check separately
 
 ```bash
-yarn pretty:write
-yarn pretty:check
+pnpm pretty:write
+pnpm pretty:check
 ```
 
 Prettier everything once
 
 ```bash
-yarn pretty
+pnpm pretty
 ```
 
 ### Lighthouse
@@ -127,17 +127,17 @@ yarn pretty
 > LHCI will check if your app respect at least 90% of these categories: performance, a11y, Best practices and seo
 
 ```bash
-yarn lighthouse
+pnpm lighthouse
 ```
 
 ### Pre-commit
 
-When committing your work, `pre-commit` will start `yarn lint-staged`:
+When committing your work, `pre-commit` will start `pnpm lint-staged`:
 
 > lint-staged starts lint + prettier
 
 ```bash
-yarn pre-commit
+pnpm pre-commit
 ```
 
 ## Build
@@ -145,13 +145,13 @@ yarn pre-commit
 TypeScript check + Vite Build
 
 ```bash
-yarn build
+pnpm build
 ```
 
 ## Preview
 
 ```bash
-yarn preview
+pnpm preview
 ```
 
 ## License
