@@ -1,4 +1,4 @@
-import Header from "@components/Header";
+import Header from "@shared/components/Header";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 

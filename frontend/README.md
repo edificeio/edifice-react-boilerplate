@@ -50,7 +50,7 @@ pnpm install
 
 ### Start project
 
-Open your project with Vite Server + HMR at <http://localhost:8080>.
+Open your project with Vite Server + HMR at <http://localhost:3000>.
 
 ```bash
 pnpm dev
@@ -63,8 +63,8 @@ You can change Vite Server by editing `vite.config.ts`
 ```bash
 server: {
   host: "0.0.0.0",
-  port: 8080,
-  open: true // open the page on <http://localhost:8080> when dev server starts.
+  port: 3000,
+  open: true // open the page on <http://localhost:3000> when dev server starts.
 }
 ```
 

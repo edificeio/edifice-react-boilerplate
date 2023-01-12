@@ -8,25 +8,69 @@ export default defineConfig({
     alias: [
       { find: "~", replacement: path.resolve(__dirname, "src") },
       {
+        find: "@assets",
+        replacement: path.resolve(__dirname, "./src/assets"),
+      },
+      {
         find: "@components",
         replacement: path.resolve(__dirname, "./src/components"),
       },
       {
-        find: "@pages",
-        replacement: path.resolve(__dirname, "./src/pages"),
+        find: "@contexts",
+        replacement: path.resolve(__dirname, "./src/contexts"),
+      },
+      {
+        find: "@features",
+        replacement: path.resolve(__dirname, "./src/features"),
       },
       {
         find: "@hooks",
         replacement: path.resolve(__dirname, "./src/hooks"),
       },
       {
-        find: "@contexts",
-        replacement: path.resolve(__dirname, "./src/contexts"),
+        find: "@pages",
+        replacement: path.resolve(__dirname, "./src/pages"),
+      },
+      {
+        find: "@shared",
+        replacement: path.resolve(__dirname, "./src/shared"),
       },
     ],
   },
   plugins: [react()],
   server: {
+    /* We define the paths necessary for local development */
+    proxy: {
+      // List of all applications
+      "/applications-list": {
+        target: "http://localhost:8090",
+        changeOrigin: false,
+      },
+      // Public Conf
+      "/conf/public": {
+        target: "http://localhost:8090",
+        changeOrigin: false,
+      },
+      "^/(?=assets|theme|locale|i18n|skin)": {
+        target: "http://localhost:8090",
+        changeOrigin: false,
+      },
+      // Entcore urls
+      "^/(?=auth|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace)":
+        {
+          target: "http://localhost:8090",
+          changeOrigin: false,
+        },
+      // App urls
+      "/blog": {
+        target: "http://localhost:8090",
+        changeOrigin: false,
+      },
+      "/explorer": {
+        target: "http://localhost:8090",
+        changeOrigin: false,
+      },
+    },
     host: "0.0.0.0",
     port: 3000,
     //open: true,
