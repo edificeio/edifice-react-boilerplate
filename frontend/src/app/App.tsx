@@ -1,41 +1,46 @@
-import Header from "@shared/components/Header";
+import { Header } from "@ode-react-ui/advanced";
+import { Main, useOdeClient } from "@ode-react-ui/core";
+import { configurationFramework } from "@shared/constants";
 import clsx from "clsx";
-import { useTranslation } from "react-i18next";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { t, i18n } = useTranslation(["translations"]);
+  const { session, theme } = useOdeClient();
 
-  function handleChangeLanguage(lng: string) {
-    i18n.changeLanguage(lng);
+  const is1d: boolean = theme?.is1D;
+  const basePath: string = theme?.basePath;
+
+  if (!session || session.notLoggedIn) {
+    return (
+      <div className="d-grid min-vh-100 align-items-center justify-content-center">
+        <a href="/auth/login" target="_blank" rel="noreferrer">
+          S'identifier sur le backend...
+        </a>
+      </div>
+    );
   }
 
-  const cxCard = clsx("card", { "card-en": i18n.language === "en" });
-
   return (
-    <div className="App">
-      <div>
-        <Header />
-      </div>
-      <h1>Vite + React</h1>
-      <h2>{t("welcome.react", { ns: "translations" })}</h2>
-      <div className={cxCard}>
-        <p>
-          Edit<code>src/App.tsx</code> and save to test HMR
-        </p>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-      <div className={cxCard}>
-        <p>Change language:</p>
-        <button type="button" onClick={() => handleChangeLanguage("fr")}>
-          fr
-        </button>
-        <button type="button" onClick={() => handleChangeLanguage("en")}>
-          en
-        </button>
-      </div>
-    </div>
+    <>
+      <Header
+        is1d={is1d}
+        src={basePath}
+        configurationFramework={configurationFramework}
+      />
+      <Main
+        className={clsx("container-fluid bg-white", {
+          "rounded-4 border": is1d,
+          "mt-24": is1d,
+        })}
+      >
+        Hello
+      </Main>
+      <Toaster
+        toastOptions={{
+          position: "top-right",
+        }}
+      />
+    </>
   );
 }
 
