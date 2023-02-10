@@ -1,78 +1,50 @@
-import { defineConfig } from "vite";
-import path from "path";
+import { defineConfig, loadEnv } from "vite";
+import { build, resolve } from "./config"
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  resolve: {
-    alias: [
-      { find: "~", replacement: path.resolve(__dirname, "src") },
-      {
-        find: "@assets",
-        replacement: path.resolve(__dirname, "./src/assets"),
-      },
-      {
-        find: "@components",
-        replacement: path.resolve(__dirname, "./src/components"),
-      },
-      {
-        find: "@contexts",
-        replacement: path.resolve(__dirname, "./src/contexts"),
-      },
-      {
-        find: "@features",
-        replacement: path.resolve(__dirname, "./src/features"),
-      },
-      {
-        find: "@hooks",
-        replacement: path.resolve(__dirname, "./src/hooks"),
-      },
-      {
-        find: "@pages",
-        replacement: path.resolve(__dirname, "./src/pages"),
-      },
-      {
-        find: "@shared",
-        replacement: path.resolve(__dirname, "./src/shared"),
-      },
-    ],
-  },
-  plugins: [react()],
-  server: {
-    /* We define the paths necessary for local development */
-    proxy: {
-      // List of all applications
-      "/applications-list": {
-        target: "http://localhost:8090",
-        changeOrigin: false,
-      },
-      // Public Conf
-      "/conf/public": {
-        target: "http://localhost:8090",
-        changeOrigin: false,
-      },
-      "^/(?=assets|theme|locale|i18n|skin)": {
-        target: "http://localhost:8090",
-        changeOrigin: false,
-      },
-      // Entcore urls
-      "^/(?=auth|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace)":
-        {
-          target: "http://localhost:8090",
-          changeOrigin: false,
-        },
-      // App urls
-      "/blog": {
-        target: "http://localhost:8090",
-        changeOrigin: false,
-      },
-      "/explorer": {
-        target: "http://localhost:8090",
-        changeOrigin: false,
-      },
+export default ({ mode }: { mode:string}) => {
+  // Checking environement files
+  const envFile = loadEnv(mode, process.cwd());
+  const envs = {...process.env, ...envFile};  
+  const hasEnvFile = Object.keys(envFile).length;
+
+  // Proxy variables
+  const headers = { cookie: `oneSessionId=${envs.VITE_ONE_SESSION_ID};authenticated=true; XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}` }
+  const resHeaders = hasEnvFile? { 
+    "set-cookie": [`oneSessionId=${envs.VITE_ONE_SESSION_ID}`,`XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}`]
+  } : {};
+  const proxyObj = hasEnvFile ? {
+    target: envs.VITE_RECETTE,
+    changeOrigin: true, headers
+  } : {
+    target: envs.VITE_LOCALHOST || "http://localhost:8090",
+    changeOrigin: false
+  }
+
+  const proxy = {
+    "/applications-list": proxyObj,
+    "/conf/public": proxyObj,
+    "^/(?=assets)": {
+      target: envs.VITE_LOCALHOST || "http://localhost:8090",
+      changeOrigin: false
     },
-    host: "0.0.0.0",
-    port: 3000,
-    //open: true,
-  },
-});
+    "^/(?=theme|locale|i18n|skin)": proxyObj,
+    "^/(?=auth|appregistry|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace|infra)":
+    proxyObj,
+    "/blog": proxyObj,
+    "/explorer": proxyObj,
+  }
+
+  return defineConfig({
+    resolve,
+    build,
+    plugins: [react()],
+    server: {
+      proxy,
+      host: "0.0.0.0",
+      port: 3000,
+      headers: resHeaders,
+    },
+  });
+}
