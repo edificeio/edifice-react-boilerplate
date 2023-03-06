@@ -29,7 +29,7 @@
     "lh": "pnpm clean:lighthouse && lhci autorun",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
-    "prepare": "cd .. && husky install frontend/.husky",
+    "prepare": "husky install .husky",
     "preview": "vite preview",
     "tsc": "tsc"
   },

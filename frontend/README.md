@@ -104,22 +104,13 @@ Add your new path to `tsconfig.json`:
 ### Lint
 
 ```bash
-pnpm lint
+turbo lint
 ```
 
 ### Prettier
 
-Prettier write and check separately
-
 ```bash
-pnpm pretty:write
-pnpm pretty:check
-```
-
-Prettier everything once
-
-```bash
-pnpm pretty
+turbo fmt
 ```
 
 ### Lighthouse
@@ -127,7 +118,7 @@ pnpm pretty
 > LHCI will check if your app respect at least 90% of these categories: performance, a11y, Best practices and seo
 
 ```bash
-pnpm lighthouse
+turbo lh
 ```
 
 ### Pre-commit
