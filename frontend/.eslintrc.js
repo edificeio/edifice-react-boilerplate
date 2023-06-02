@@ -10,6 +10,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
   ],
+  overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -23,12 +24,15 @@ module.exports = {
   plugins: ["react", "jsx-a11y"],
   rules: {
     "arrow-parens": "off",
+    "react/no-array-index-key": "error",
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": ["off"],
     "react/jsx-props-no-spreading": "off",
     "react/no-unescaped-entities": ["off"],
     "react/jsx-one-expression-per-line": "off",
     "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/await-thenable": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -39,6 +43,14 @@ module.exports = {
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
+    ],
     "no-console": "off",
     "import/order": [
       "error",
@@ -71,6 +83,7 @@ module.exports = {
     "node_modules",
     "prettier.config.js",
     "public",
+    "scripts/",
     "vite.config.ts",
   ],
 };

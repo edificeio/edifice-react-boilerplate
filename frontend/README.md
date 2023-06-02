@@ -2,20 +2,7 @@
 
 This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplate.
 
-## What is inside?
-
-Many tools are already configured like:
-
-- [ReactJS](https://reactjs.org)
-- [Vite](https://vitejs.dev)
-- [TypeScript](https://www.typescriptlang.org)
-- [...](./TOOLS.md)
-
-[See all tools](./TOOLS.md)
-
 ## Getting Started
-
-### Install
 
 Create the project with the name of your app (Ex: blog)
 
@@ -40,10 +27,28 @@ git remote add origin git@github.com:<ORG>/<app>.git
 git push -u origin main
 ```
 
+## Install
+
+### With Docker
+
 Install all dependencies.
 
 ```bash
-pnpm install
+./build.sh initDev
+```
+
+### Without Docker
+
+Install all dependencies.
+
+```bash
+./build-noDocker.sh initDev
+```
+
+or
+
+```bash
+node scripts/package.js && pnpm install
 ```
 
 ## Dev
@@ -68,49 +73,16 @@ server: {
 }
 ```
 
-### Absolute Imports
-
-You should use absolute imports in your app
-
-```bash
-Replace ../components/* by components/*
-```
-
-Edit `vite.config.ts` and add an `alias`
-
-> Telling Vite how to build import path:
-
-```bash
-alias: [
-  { find: "~", replacement: path.resolve(__dirname, "src") },
-  {
-    find: "components",
-    replacement: path.resolve(__dirname, "./src/components"),
-  },
-]
-```
-
-Add your new path to `tsconfig.json`:
-
-> Telling TypeScript how to resolve import path:
-
-```bash
-"baseUrl": "./src",
-"paths": {
-  "components/*": ["./components/*"],
-}
-```
-
 ### Lint
 
 ```bash
-turbo lint
+pnpm lint
 ```
 
 ### Prettier
 
 ```bash
-turbo fmt
+pnpm format
 ```
 
 ### Lighthouse
@@ -118,7 +90,7 @@ turbo fmt
 > LHCI will check if your app respect at least 90% of these categories: performance, a11y, Best practices and seo
 
 ```bash
-turbo lh
+pnpm lh
 ```
 
 ### Pre-commit

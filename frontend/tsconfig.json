@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -17,16 +17,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "paths": {
-      "@app/*": ["./app/*"],
-      "@assets/*": ["./assets/*"],
-      "@components/*": ["./components/*"],
-      "@config/*": ["./config/*"],
-      "@contexts/*": ["./contexts/*"],
-      "@features/*": ["./features/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@pages/*": ["./pages/*"],
-      "@shared/*": ["./shared/*"],
-      "@store/*": ["./store/*"]
+      "~/*": ["./src/*"]
     }
   },
   "include": ["src", "config", "./vite.config.ts"]
