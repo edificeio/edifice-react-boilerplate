@@ -1,15 +1,8 @@
 import React, { StrictMode } from "react";
 
-import { OdeClientProvider } from "@ode-react-ui/core";
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 
-import Root from "~/app/Root";
+import "./index.css";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);
@@ -21,31 +14,39 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: (error) => {
-      if (error === "0090") window.location.replace("/auth/login");
-    },
-  }),
-  defaultOptions: {
-    queries: {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
 root.render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <OdeClientProvider
-        params={{
-          app: "blog",
-        }}
-      >
-        <Root />
-      </OdeClientProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <>
+      <h1>How to start?</h1>
+      <div className="card">
+        <h2>Local environnement</h2>
+        <p>You can use of the following:</p>
+        <ul style={{ textAlign: "left" }}>
+          <li>
+            <code>springboard</code>
+          </li>
+          <li>
+            <code>ode-dev-server</code>
+          </li>
+        </ul>
+        <p>
+          This is required to allow Vite proxy to connect your React App to
+          <code> localhost:8090</code>
+        </p>
+        <h2>Remote environnement</h2>
+        <ul style={{ textAlign: "left" }}>
+          <li>
+            Use the<code>.env.template</code>
+          </li>
+          <li>
+            Rename the file to <code>.env.local</code>
+          </li>
+          <li>And fill in the blank!</li>
+        </ul>
+        <p>
+          Vite uses <code>VITE_RECETTE</code> to connect
+        </p>
+      </div>
+    </>
   </StrictMode>,
 );
