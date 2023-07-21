@@ -4,27 +4,16 @@ This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplat
 
 ## Getting Started
 
-Create the project with the name of your app (Ex: blog)
+Create the project inside the project of your app
 
 ```bash
-npx degit opendigitaleducation/ode-react-boilerplate blog
+npx degit opendigitaleducation/ode-react-boilerplate .
 ```
 
 Go to the project directory.
 
 ```bash
-cd blog
-```
-
-Git init, commit and push to remote repository
-
-```bash
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:<ORG>/<app>.git
-git push -u origin main
+cd frontend
 ```
 
 ## Install
