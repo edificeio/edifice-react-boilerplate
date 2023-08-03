@@ -1,14 +1,14 @@
 {
   "name": "edifice-react-boilerplate",
-  "version": "1.0.0-develop.20230831021",
+  "version": "1.0.0-develop.20230831100",
   "description": "Edifice React boilerplate",
-  "homepage": "https://github.com/opendigitaleducation/edifice-react-boilerplate#readme",
+  "homepage": "https://github.com/opendigitaleducation/ode-react-boilerplate#readme",
   "bugs": {
-    "url": "https://github.com/opendigitaleducation/edifice-react-boilerplate/issues"
+    "url": "https://github.com/opendigitaleducation/ode-react-boilerplate/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opendigitaleducation/edifice-react-boilerplate.git"
+    "url": "git+https://github.com/opendigitaleducation/ode-react-boilerplate.git"
   },
   "license": "GPL-3.0",
   "author": "Edifice",
@@ -48,6 +48,7 @@
     "@edifice-ui/react": "develop",
     "@react-spring/web": "9.7.2",
     "@tanstack/react-query": "4.29.12",
+    "dayjs": "1.11.8",
     "i18next": "23.2.6",
     "i18next-http-backend": "2.2.1",
     "ode-ts-client": "dev",
