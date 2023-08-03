@@ -1,7 +1,11 @@
-import { LoadingScreen, Layout, EmptyScreen } from "@ode-react-ui/components";
-import { useOdeClient } from "@ode-react-ui/core";
+import {
+  LoadingScreen,
+  Layout,
+  EmptyScreen,
+  useOdeClient,
+} from "@edifice-ui/react";
 
-import starterImage from "../assets/starter.png";
+import starterImage from "../../assets/starter.png";
 
 function Root() {
   const { init } = useOdeClient();

@@ -1,4 +1,4 @@
-# Open Digital Education React Boilerplate with Vite
+# Edifice React Boilerplate with Vite
 
 This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplate.
 
@@ -7,7 +7,7 @@ This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplat
 Create the project inside the project of your app
 
 ```bash
-npx degit opendigitaleducation/ode-react-boilerplate .
+npx degit opendigitaleducation/edifice-react-boilerplate .
 ```
 
 Go to the project directory.

@@ -1,20 +1,36 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
 i18n
   .use(Backend)
-  .use(LanguageDetector) // detect user language
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
-    lng: "fr", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
-    // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
-    // if you're using a language detector, do not define the lng option
-
-    interpolation: {
-      escapeValue: false, // react already safes from xss
+    backend: {
+      loadPath: (_lngs: string[], namespaces: string[]) => {
+        const urls = namespaces.map((namespace: string) => {
+          if (namespace === "common") {
+            return `/i18n`;
+          }
+          return `/${namespace}/i18n`;
+        });
+        return urls;
+      },
+      parse: function (data: string) {
+        return JSON.parse(data);
+      },
     },
+    defaultNS: "common",
+    // you can add name of the app directly in the ns array
+    ns: ["common"],
+    fallbackLng: "fr",
+    lng: "fr",
+    interpolation: {
+      escapeValue: false,
+      prefix: "[[",
+      suffix: "]]",
+    },
+    debug: false,
   });
 
 export default i18n;

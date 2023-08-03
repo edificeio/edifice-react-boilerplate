@@ -44,16 +44,38 @@ export default ({ mode }: { mode: string }) => {
       proxyObj,
     "/blog": proxyObj,
     "/explorer": proxyObj,
+    "/mindmap": proxyObj,
+  };
+
+  const base = mode === "production" ? "APP_NAME" : "";
+
+  const build = {
+    assetsDir: "public",
+    rollupOptions: {
+      external: ["ode-ts-client" /* "ode-explorer" */],
+      output: {
+        paths: {
+          "ode-ts-client": "/assets/js/ode-ts-client/ode-ts-client.esm.js",
+          // "ode-explorer": "/assets/js/ode-explorer/index.js",
+        },
+      },
+    },
+  };
+
+  const plugins = [react(), tsconfigPaths()];
+
+  const server = {
+    proxy,
+    host: "0.0.0.0",
+    port: 3000,
+    headers: resHeaders,
+    open: false,
   };
 
   return defineConfig({
-    plugins: [react(), tsconfigPaths()],
-    server: {
-      proxy,
-      host: "0.0.0.0",
-      port: 3000,
-      headers: resHeaders,
-      open: true,
-    },
+    base,
+    build,
+    plugins,
+    server,
   });
 };

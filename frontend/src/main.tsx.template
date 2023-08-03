@@ -1,6 +1,6 @@
 import React, { StrictMode } from "react";
 
-import { OdeClientProvider } from "@ode-react-ui/core";
+import { OdeClientProvider } from "@edifice-ui/react";
 import {
   QueryCache,
   QueryClient,
@@ -9,7 +9,8 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 
-import Root from "~/app/Root";
+import Root from "~/app/root";
+import { ThemeProvider } from "@edifice-ui/react";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);
@@ -43,7 +44,9 @@ root.render(
           app: "blog",
         }}
       >
-        <Root />
+        <ThemeProvider>
+          <Root />
+        </ThemeProvider>
       </OdeClientProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
