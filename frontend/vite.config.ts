@@ -47,16 +47,15 @@ export default ({ mode }: { mode: string }) => {
     "/mindmap": proxyObj,
   };
 
-  const base = mode === "production" ? "APP_NAME" : "";
+  const base = mode === "production" ? "/" : "";
 
   const build = {
     assetsDir: "public",
     rollupOptions: {
-      external: ["ode-ts-client" /* "ode-explorer" */],
+      external: ["ode-ts-client"],
       output: {
         paths: {
           "ode-ts-client": "/assets/js/ode-ts-client/ode-ts-client.esm.js",
-          // "ode-explorer": "/assets/js/ode-explorer/index.js",
         },
       },
     },

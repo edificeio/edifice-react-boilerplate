@@ -13,7 +13,7 @@ function Root() {
   if (!init) return <LoadingScreen position={false} />;
 
   return init ? (
-    <Layout style={{ justifyContent: "center" }}>
+    <Layout>
       <EmptyScreen
         imageSrc={starterImage}
         imageAlt=""
