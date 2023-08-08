@@ -42,12 +42,16 @@ function generatePackage(content) {
 }
 
 function generateDeps(content) {
-  const deps = content.dependencies;
-
   return {
-    ...deps,
+    ...content.dependencies,
     "@edifice-ui/icons": BRANCH,
     "@edifice-ui/react": BRANCH,
+  };
+}
+
+function generateDevDeps(content) {
+  return {
+    ...content.devDependencies,
     "edifice-ts-client": BRANCH,
   };
 }
@@ -69,6 +73,7 @@ function createPackage() {
 
       content.version = version;
       content.dependencies = generateDeps(content);
+      content.devDependencies = generateDevDeps(content);
 
       generatePackage(content);
     },
