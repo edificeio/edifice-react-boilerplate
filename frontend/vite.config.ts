@@ -10,10 +10,7 @@ export default ({ mode }: { mode: string }) => {
   const hasEnvFile = Object.keys(envFile).length;
 
   // Proxy variables
-  const headers = {
-    cookie: `oneSessionId=${envs.VITE_ONE_SESSION_ID};authenticated=true; XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}`,
-  };
-  const resHeaders = hasEnvFile
+  const headers = hasEnvFile
     ? {
         "set-cookie": [
           `oneSessionId=${envs.VITE_ONE_SESSION_ID}`,
@@ -27,7 +24,9 @@ export default ({ mode }: { mode: string }) => {
     ? {
         target: envs.VITE_RECETTE,
         changeOrigin: true,
-        headers,
+        headers: {
+          cookie: `oneSessionId=${envs.VITE_ONE_SESSION_ID};authenticated=true; XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}`,
+        },
       }
     : {
         target: envs.VITE_LOCALHOST || "http://localhost:8090",
@@ -47,6 +46,7 @@ export default ({ mode }: { mode: string }) => {
     "/mindmap": proxyObj,
   };
 
+  /* Replace "/" the name of your application (e.g : blog | mindmap | collaborativewall) */
   const base = mode === "production" ? "/" : "";
 
   const build = {
@@ -67,8 +67,8 @@ export default ({ mode }: { mode: string }) => {
     proxy,
     host: "0.0.0.0",
     port: 3000,
-    headers: resHeaders,
-    open: false,
+    headers,
+    open: true,
   };
 
   return defineConfig({
