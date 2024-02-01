@@ -1,0 +1,6 @@
+# .husky/post-checkout
+BRANCH_CHECKOUT_FLAG=$3
+
+if [ "$BRANCH_CHECKOUT_FLAG" -eq 1 ]; then
+    cd frontend && pnpm update-deps
+fi

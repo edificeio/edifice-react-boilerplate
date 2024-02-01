@@ -1,6 +1,6 @@
 {
   "name": "edifice-react-boilerplate",
-  "version": "1.0.0-develop.20230881606",
+  "version": "1.0.0-develop.20242221642",
   "description": "Edifice React boilerplate",
   "homepage": "https://github.com/opendigitaleducation/ode-react-boilerplate#readme",
   "bugs": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opendigitaleducation/ode-react-boilerplate.git"
+    "url": "https://github.com/opendigitaleducation/ode-react-boilerplate.git"
   },
   "license": "GPL-3.0",
   "author": "Edifice",
@@ -29,12 +29,14 @@
     "lighthouse": "pnpm clean:lighthouse && lhci autorun",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
-    "prepare": "cd .. && husky install frontend/.husky",
-    "preview": "vite preview"
+    "prepare": "cd .. && husky frontend/.husky",
+    "preview": "vite preview",
+    "update-deps": "npx ccreusat-update-deps -c && pnpm install"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-checkout": "npx ccreusat-update-deps -c && pnpm install"
     }
   },
   "lint-staged": {
@@ -67,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "6.19.1",
     "@typescript-eslint/parser": "6.19.1",
     "@vitejs/plugin-react": "4.2.1",
+    "ccreusat-update-deps": "^1.0.0",
     "clsx": "2.1.0",
     "concurrently": "8.2.2",
     "csstype": "3.1.3",
@@ -90,5 +93,11 @@
   "packageManager": "pnpm@8.6.6",
   "engines": {
     "node": "18 || 20"
+  },
+  "updateconfig": {
+    "prefixes": [
+      "@edifice-ui",
+      "edifice"
+    ]
   }
 }
