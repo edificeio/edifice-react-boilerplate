@@ -51,6 +51,7 @@ export default ({ mode }: { mode: string }) => {
 
   const build = {
     assetsDir: "public",
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       external: ["edifice-ts-client"],
       output: {
