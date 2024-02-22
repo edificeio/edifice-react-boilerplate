@@ -30,7 +30,8 @@
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "prepare": "cd .. && husky frontend/.husky",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-deps": "npx ccreusat-update-deps -c && pnpm install"
   },
   "husky": {
     "hooks": {
