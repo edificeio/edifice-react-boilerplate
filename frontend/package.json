@@ -29,8 +29,9 @@
     "lighthouse": "pnpm clean:lighthouse && lhci autorun",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
-    "prepare": "cd .. && husky install frontend/.husky",
-    "preview": "vite preview"
+    "prepare": "cd .. && husky frontend/.husky",
+    "preview": "vite preview",
+    "update-deps": "npx ccreusat-update-deps -c && pnpm install"
   },
   "husky": {
     "hooks": {
