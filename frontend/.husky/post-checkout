@@ -1,3 +1,11 @@
-# .husky/pre-commit
+# .husky/post-checkout
 
-cd frontend && pnpm update-deps
+BRANCH_CHECKOUT_FLAG=$3
+
+# Vérifie si c'est un changement de branche
+if [ "$BRANCH_CHECKOUT_FLAG" -eq 1 ]; then
+    # Exécute le script Node.js uniquement lors d'un changement de branche
+    cd frontend && pnpm update-deps
+else
+  echo "Ce n'est pas un changement de branche."
+fi
