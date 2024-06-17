@@ -62,11 +62,29 @@ doInit () {
     BRANCH_NAME=`git branch | sed -n -e "s/^\* \(.*\)/\1/p"`
   fi
 
-  echo "[init] Generate package.json from package.json.template..."
+  # if [ "BRANCH_NAME" == "main" ]
+  #   echo "[init] Generate package.json from package.json..."
+  #   NPM_VERSION_SUFFIX=`date +"%Y%m%d%H%M"`
+  #   sed -i "s/%branch%/${BRANCH_NAME}/" package.json
+  #   sed -i "s/%generateVersion%/${NPM_VERSION_SUFFIX}/" package.json
+  # fi
+
+  # Récupérer la branche courante
+  # Récupérer la version actuelle du package.json
+  CURRENT_VERSION=$(sed -n 's/.*"version": "\(.*\)",/\1/p' package.json)
+
+  # Générer le suffixe de version
   NPM_VERSION_SUFFIX=`date +"%Y%m%d%H%M"`
-  cp package.json.template package.json
-  sed -i "s/%branch%/${BRANCH_NAME}/" package.json
-  sed -i "s/%generateVersion%/${NPM_VERSION_SUFFIX}/" package.json
+
+  # Définir la nouvelle version
+  if [[ "$BRANCH_NAME" == "main" ]]; then
+      NEW_VERSION="${CURRENT_VERSION}"
+  elif [[ "$BRANCH_NAME" == develop-* ]]; then
+      NEW_VERSION="${CURRENT_VERSION}-${BRANCH_NAME}-${NPM_VERSION_SUFFIX}"
+  else
+      echo "Branche non supportée : ${BRANCH_NAME}"
+      exit 1
+  fi
 
   if [ "$1" == "Dev" ]
   then

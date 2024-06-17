@@ -1,9 +1,7 @@
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- This is a starter file and can be modified.
+ This is a starter file and can be deleted.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Modifiy this file and get started with your project!
+ All UI components shared across the application
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-
-export * from './actions';

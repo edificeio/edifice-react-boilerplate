@@ -7,7 +7,7 @@ This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplat
 Create the project inside the project of your app
 
 ```bash
-npx degit opendigitaleducation/edifice-react-boilerplate .
+npx degit edificeio/edifice-react-boilerplate . --force
 ```
 
 Go to the project directory.
@@ -47,7 +47,7 @@ node scripts/package.cjs && pnpm install
 Open your project with Vite Server + HMR at <http://localhost:3000>.
 
 ```bash
-pnpm dev
+nx serve
 ```
 
 ### [Server Options](https://vitejs.dev/config/server-options.html)
@@ -57,29 +57,21 @@ You can change Vite Server by editing `vite.config.ts`
 ```bash
 server: {
   host: "0.0.0.0",
-  port: 3000,
-  open: true // open the page on <http://localhost:3000> when dev server starts.
+  port: 4200,
+  open: true // open the page on <http://localhost:4200> when dev server starts.
 }
 ```
 
 ### Lint
 
 ```bash
-pnpm lint
+nx lint
 ```
 
 ### Prettier
 
 ```bash
-pnpm format
-```
-
-### Lighthouse
-
-> LHCI will check if your app respect at least 90% of these categories: performance, a11y, Best practices and seo
-
-```bash
-pnpm lh
+nx format
 ```
 
 ### Pre-commit
@@ -97,13 +89,7 @@ pnpm pre-commit
 TypeScript check + Vite Build
 
 ```bash
-pnpm build
-```
-
-## Preview
-
-```bash
-pnpm preview
+nx build
 ```
 
 ## License

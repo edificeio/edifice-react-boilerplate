@@ -2,8 +2,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  This is a starter file and can be modified.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Modifiy this file and get started with your project!
+ This folder should contain mocks for your tests
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-
-export * from './actions';
