@@ -1,7 +1,16 @@
 /// <reference types='vitest' />
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
+import { createHash } from 'node:crypto';
 import { defineConfig, loadEnv } from 'vite';
+import { hashEdificeBootstrap } from './plugins/vite-plugin-edifice';
+
+const hash = createHash('md5')
+  .update(Date.now().toString())
+  .digest('hex')
+  .substring(0, 8);
+
+const queryHashVersion = `v=${hash}`;
 
 export default ({ mode }: { mode: string }) => {
   // Checking environement files
@@ -62,7 +71,13 @@ export default ({ mode }: { mode: string }) => {
       host: 'localhost',
     },
 
-    plugins: [react(), nxViteTsPaths()],
+    plugins: [
+      react(),
+      nxViteTsPaths(),
+      hashEdificeBootstrap({
+        hash: queryHashVersion,
+      }),
+    ],
 
     // Uncomment this if you are using workers.
     // worker: {
@@ -82,7 +97,7 @@ export default ({ mode }: { mode: string }) => {
         external: ['edifice-ts-client'],
         output: {
           paths: {
-            'edifice-ts-client': '/assets/js/edifice-ts-client/index.js',
+            'edifice-ts-client': `/assets/js/edifice-ts-client/index.js?${queryHashVersion}`,
           },
         },
       },
