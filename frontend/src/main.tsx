@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react';
 
-import { ThemeProvider } from '@edifice-ui/react';
+import { ThemeProvider } from '@edifice.io/react';
 import { createRoot } from 'react-dom/client';
 
 import { RouterProvider } from 'react-router-dom';

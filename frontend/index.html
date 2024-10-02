@@ -2,16 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    Par
     <base href="/" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" id="favicon" href="" />
     <link rel="stylesheet" href="/assets/themes/edifice-bootstrap/index.css" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@edifice.io/icons@2.0.0-develop-rc.8/dist/icons.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <title>Vite + React + TS</title>
+    <!--app-head-->
   </head>
   <body>
-    <div id="root"></div>
-    <div id="portal"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <body>
+      <div id="root"><!--app-html--></div>
+      <div id="portal"></div>
+      <script type="module" src="/src/entry-client.tsx"></script>
+    </body>
+    <script type="module" src="/src/entry-client.tsx"></script>
   </body>
 </html>

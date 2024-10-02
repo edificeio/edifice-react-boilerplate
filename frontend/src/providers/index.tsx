@@ -1,4 +1,5 @@
-import { OdeClientProvider } from '@edifice-ui/react';
+//import '@edifice.io/icons/dist/icons.svg';
+import { OdeClientProvider } from '@edifice.io/react';
 import {
   QueryCache,
   QueryClient,
