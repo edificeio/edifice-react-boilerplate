@@ -5,15 +5,20 @@ This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplat
 ## Getting Started
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Paste this in your terminal inside a new project
 =======
 Create the project inside the project of your app
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+Paste this in your terminal inside a new project
+>>>>>>> 79013a6 (docs: update README.md)
 
 ```bash
 npx degit edificeio/edifice-react-boilerplate . --force
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 It will clone the boilerplate and create a configured `frontend` folder.
 
@@ -21,6 +26,11 @@ Then, go to the frontend folder.
 =======
 Go to the project directory.
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+It will clone the boilerplate and create a configured `frontend` folder.
+
+Then, go to the frontend folder.
+>>>>>>> 79013a6 (docs: update README.md)
 
 ```bash
 cd frontend
@@ -29,19 +39,28 @@ cd frontend
 ## Install
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 **With pnpm**
 
 =======
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+**With pnpm**
+
+>>>>>>> 79013a6 (docs: update README.md)
 ```bash
 pnpm install
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 **With Docker**
 =======
 ### With Docker
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+**With Docker**
+>>>>>>> 79013a6 (docs: update README.md)
 
 Install all dependencies.
 
@@ -50,10 +69,14 @@ Install all dependencies.
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 **Without Docker**
 =======
 ### Without Docker
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+**Without Docker**
+>>>>>>> 79013a6 (docs: update README.md)
 
 Install all dependencies.
 
@@ -70,6 +93,7 @@ pnpm add --global nx@latest
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### Start your project
 
 Start your project with Vite Server + HMR at <http://localhost:4200>.
@@ -78,6 +102,11 @@ Start your project with Vite Server + HMR at <http://localhost:4200>.
 
 Open your project with Vite Server + HMR at <http://localhost:3000>.
 >>>>>>> 4a44943 (chore: update dependencies)
+=======
+### Start your project
+
+Start your project with Vite Server + HMR at <http://localhost:4200>.
+>>>>>>> 79013a6 (docs: update README.md)
 
 ```bash
 nx serve
