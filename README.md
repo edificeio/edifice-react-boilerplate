@@ -4,15 +4,23 @@ This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplat
 
 ## Getting Started
 
+<<<<<<< HEAD
 Paste this in your terminal inside a new project
+=======
+Create the project inside the project of your app
+>>>>>>> 4a44943 (chore: update dependencies)
 
 ```bash
 npx degit edificeio/edifice-react-boilerplate . --force
 ```
 
+<<<<<<< HEAD
 It will clone the boilerplate and create a configured `frontend` folder.
 
 Then, go to the frontend folder.
+=======
+Go to the project directory.
+>>>>>>> 4a44943 (chore: update dependencies)
 
 ```bash
 cd frontend
@@ -20,13 +28,20 @@ cd frontend
 
 ## Install
 
+<<<<<<< HEAD
 **With pnpm**
 
+=======
+>>>>>>> 4a44943 (chore: update dependencies)
 ```bash
 pnpm install
 ```
 
+<<<<<<< HEAD
 **With Docker**
+=======
+### With Docker
+>>>>>>> 4a44943 (chore: update dependencies)
 
 Install all dependencies.
 
@@ -34,7 +49,11 @@ Install all dependencies.
 ./build.sh initDev
 ```
 
+<<<<<<< HEAD
 **Without Docker**
+=======
+### Without Docker
+>>>>>>> 4a44943 (chore: update dependencies)
 
 Install all dependencies.
 
@@ -50,9 +69,15 @@ You need `nx` install globaly on your machine
 pnpm add --global nx@latest
 ```
 
+<<<<<<< HEAD
 ### Start your project
 
 Start your project with Vite Server + HMR at <http://localhost:4200>.
+=======
+### Start project
+
+Open your project with Vite Server + HMR at <http://localhost:3000>.
+>>>>>>> 4a44943 (chore: update dependencies)
 
 ```bash
 nx serve
