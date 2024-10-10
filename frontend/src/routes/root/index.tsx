@@ -18,7 +18,7 @@ export const loader = async () => {
       // Redirect to the new format
       const redirectPath = `/id/${isPath?.params.id}`;
       location.replace(
-        location.origin + basename.replace(/\/$/g, '') + redirectPath
+        location.origin + basename.replace(/\/$/g, '') + redirectPath,
       );
     }
   }

@@ -8,7 +8,7 @@ import { server } from './node';
 beforeAll(() =>
   server.listen({
     onUnhandledRequest: 'bypass',
-  })
+  }),
 );
 
 // Reset any request handlers that are declared as a part of our tests

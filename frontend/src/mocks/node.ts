@@ -64,7 +64,7 @@ const defaultHandlers = [
   }),
 
   http.get('/locale', () => {
-    return HttpResponse.text('fr');
+    return HttpResponse.json({ locale: 'fr' });
   }),
 
   http.get('/directory/userbook/a1b2c3d4', () => {

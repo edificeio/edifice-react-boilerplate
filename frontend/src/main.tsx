@@ -25,5 +25,5 @@ root.render(
         <RouterProvider router={router(queryClient)} />
       </ThemeProvider>
     </Providers>
-  </StrictMode>
+  </StrictMode>,
 );

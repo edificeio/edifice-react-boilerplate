@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '~/mocks/setup.vitest';
 
 import App from './app';
 

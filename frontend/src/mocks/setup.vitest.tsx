@@ -13,7 +13,7 @@ import './setup.msw';
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, 'wrapper'>,
 ) => render(ui, { wrapper: Providers, ...options });
 
 /**
@@ -24,7 +24,7 @@ const customRender = (
 export const renderWithRouter = (
   path = '/',
   target: string,
-  element: JSX.Element
+  element: JSX.Element,
 ) => {
   const routes = [
     {
