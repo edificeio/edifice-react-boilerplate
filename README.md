@@ -44,7 +44,7 @@ Install all dependencies.
 
 ## Dev
 
-You need `nx` install globaly on your machine
+You need `nx` installed globally on the machine
 
 ```
 pnpm add --global nx@latest
@@ -55,7 +55,7 @@ pnpm add --global nx@latest
 Start your project with Vite Server + HMR at <http://localhost:4200>.
 
 ```bash
-nx serve
+pnpm run dev
 ```
 
 ### [Server Options](https://vitejs.dev/config/server-options.html)
@@ -73,13 +73,13 @@ server: {
 ### Lint
 
 ```bash
-nx lint
+pnpm run lint
 ```
 
 ### Prettier
 
 ```bash
-nx format
+pnpm run format
 ```
 
 ### Pre-commit
@@ -97,7 +97,7 @@ pnpm pre-commit
 TypeScript check + Vite Build
 
 ```bash
-nx build
+pnpm run build
 ```
 
 ## License

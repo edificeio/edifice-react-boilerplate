@@ -1,17 +1,13 @@
-/// <reference types='vitest' />
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+/// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
-import { createHash } from 'node:crypto';
 import { defineConfig, loadEnv } from 'vite';
-import { hashEdificeBootstrap } from './plugins/vite-plugin-edifice';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import {
+  hashEdificeBootstrap,
+  queryHashVersion,
+} from './plugins/vite-plugin-edifice';
 
-const hash = createHash('md5')
-  .update(Date.now().toString())
-  .digest('hex')
-  .substring(0, 8);
-
-const queryHashVersion = `v=${hash}`;
-
+// https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
   // Checking environement files
   const envFile = loadEnv(mode, process.cwd());
@@ -42,7 +38,6 @@ export default ({ mode }: { mode: string }) => {
         changeOrigin: false,
       };
 
-  /* Replace "/" the name of your application (e.g : blog | mindmap | collaborativewall) */
   return defineConfig({
     base: mode === 'production' ? '/boilerplate' : '',
     root: __dirname,
@@ -73,16 +68,11 @@ export default ({ mode }: { mode: string }) => {
 
     plugins: [
       react(),
-      nxViteTsPaths(),
+      tsconfigPaths(),
       hashEdificeBootstrap({
         hash: queryHashVersion,
       }),
     ],
-
-    // Uncomment this if you are using workers.
-    // worker: {
-    //  plugins: [ nxViteTsPaths() ],
-    // },
 
     build: {
       outDir: './dist',
@@ -92,10 +82,11 @@ export default ({ mode }: { mode: string }) => {
         transformMixedEsModules: true,
       },
       assetsDir: 'public',
-      chunkSizeWarningLimit: 2000,
+      chunkSizeWarningLimit: 4000,
       rollupOptions: {
         external: ['edifice-ts-client'],
         output: {
+          inlineDynamicImports: true,
           paths: {
             'edifice-ts-client': `/assets/js/edifice-ts-client/index.js?${queryHashVersion}`,
           },
@@ -108,8 +99,7 @@ export default ({ mode }: { mode: string }) => {
       globals: true,
       environment: 'jsdom',
       include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-      setupFiles: ['./src/mocks/setup.vitest.tsx'],
-
+      setupFiles: ['./src/mocks/setup.ts'],
       reporters: ['default'],
       coverage: {
         reportsDirectory: './coverage/boilerplate',

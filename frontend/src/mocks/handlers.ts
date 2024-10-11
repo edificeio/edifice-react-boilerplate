@@ -1,5 +1,4 @@
 import { HttpResponse, http } from 'msw';
-import { setupServer } from 'msw/node';
 
 /**
  * DO NOT MODIFY
@@ -230,6 +229,4 @@ const defaultHandlers = [
  * MSW Handlers
  * Mock HTTP methods for your own application
  */
-const handlers = [...defaultHandlers];
-
-export const server = setupServer(...handlers);
+export const handlers = [...defaultHandlers];

@@ -42,5 +42,4 @@ Thumbs.db
 .nx/workspace-data
 
 .env*
-
-.DS_Store
+*.tsbuildinfo

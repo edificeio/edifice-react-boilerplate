@@ -1,9 +1,7 @@
-/* eslint-disable no-restricted-globals */
 import { Layout, LoadingScreen, useOdeClient } from '@edifice-ui/react';
 
 import { matchPath } from 'react-router-dom';
 
-import App from '~/app/app';
 import { basename } from '..';
 
 /** Check old format URL and redirect if needed */
@@ -31,11 +29,7 @@ export const Root = () => {
 
   if (!init) return <LoadingScreen position={false} />;
 
-  return init ? (
-    <Layout>
-      <App />
-    </Layout>
-  ) : null;
+  return init ? <Layout>Boilerplate</Layout> : null;
 };
 
 export default Root;
