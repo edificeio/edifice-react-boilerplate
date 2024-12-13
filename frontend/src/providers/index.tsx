@@ -1,11 +1,11 @@
-import { OdeClientProvider } from '@edifice-ui/react';
+import { ERROR_CODE } from '@edifice.io/client';
+import { EdificeClientProvider } from '@edifice.io/react';
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ERROR_CODE } from 'edifice-ts-client';
 import { ReactNode } from 'react';
 
 export const queryClient = new QueryClient({
@@ -29,13 +29,13 @@ export const queryClient = new QueryClient({
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <OdeClientProvider
+      <EdificeClientProvider
         params={{
           app: 'boilerplate',
         }}
       >
         {children}
-      </OdeClientProvider>
+      </EdificeClientProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

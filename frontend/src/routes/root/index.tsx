@@ -1,4 +1,4 @@
-import { Layout, LoadingScreen, useOdeClient } from '@edifice-ui/react';
+import { Layout, LoadingScreen, useEdificeClient } from '@edifice.io/react';
 
 import { matchPath } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export const loader = async () => {
 };
 
 export const Root = () => {
-  const { init } = useOdeClient();
+  const { init } = useEdificeClient();
 
   if (!init) return <LoadingScreen position={false} />;
 
