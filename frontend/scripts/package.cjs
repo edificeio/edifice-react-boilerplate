@@ -5,15 +5,42 @@ const now = new Date();
 
 const BRANCH = executeGitCommand('git rev-parse --abbrev-ref HEAD');
 
-function executeGitCommand(command) {
-  try {
-    return execSync(command)
-      .toString('utf8')
-      .replace(/[\n\r\s]+$/, '');
-  } catch (error) {
-    console.error(`Error executing command "${command}": ${error.message}`);
-    process.exit(1);
+function getCorrectVersion(lib) {
+  let branch;
+  switch (BRANCH) {
+    case 'main': {
+      branch = executeGitCommand(`npm view ${lib} version`);
+      break;
+    }
+
+    case 'develop': {
+      branch = 'develop';
+      break;
+    }
+
+    case 'develop-pedago': {
+      branch = 'develop-pedago';
+      break;
+    }
+
+    case 'develop-b2school': {
+      branch = 'develop-b2school';
+      break;
+    }
+
+    default: {
+      branch = 'develop';
+      break;
+    }
   }
+
+  return branch;
+}
+
+function executeGitCommand(command) {
+  return execSync(command)
+    .toString('utf8')
+    .replace(/[\n\r\s]+$/, '');
 }
 
 function generateVersion() {
@@ -40,7 +67,6 @@ function generatePackage(content) {
     (err) => {
       if (err) {
         console.error(err);
-        process.exit(1);
       }
       console.log(`version generated: ${content.version}`);
     },
@@ -48,40 +74,39 @@ function generatePackage(content) {
 }
 
 function generateDeps(content) {
-  return {
-    ...content.dependencies,
-    '@edifice-ui/icons': BRANCH,
-    '@edifice-ui/react': BRANCH,
-  };
-}
+  const deps = { ...content.dependencies };
 
-function generateDevDeps(content) {
-  return {
-    ...content.devDependencies,
-    'edifice-ts-client': BRANCH,
-    'edifice-bootstrap': BRANCH,
-  };
+  // Find all @edifice.io dependencies and update their versions
+  Object.keys(deps).forEach((dep) => {
+    if (dep.startsWith('@edifice.io/')) {
+      deps[dep] = getCorrectVersion(dep);
+    }
+  });
+
+  return deps;
 }
 
 function createPackage() {
-  fs.readFile(path.resolve(__dirname, '../package.json'), (err, data) => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
+  fs.readFile(
+    path.resolve(__dirname, '../package.json.template'),
+    (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
 
-    let content = JSON.parse(data);
-    let version = content.version;
+      let content = JSON.parse(data);
+      let version = content.version;
 
-    version = version.replace('%branch%', BRANCH);
-    version = version.replace('%generateVersion%', generateVersion());
+      version = version.replace('%branch%', BRANCH);
+      version = version.replace('%generateVersion%', generateVersion());
 
-    content.version = version;
-    content.dependencies = generateDeps(content);
-    content.devDependencies = generateDevDeps(content);
+      content.version = version;
+      content.dependencies = generateDeps(content);
 
-    generatePackage(content);
-  });
+      generatePackage(content);
+    },
+  );
 }
 
 createPackage();

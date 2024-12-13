@@ -1,4 +1,4 @@
-import { Layout, LoadingScreen, useOdeClient } from '@edifice-ui/react';
+import { Layout, LoadingScreen, useOdeClient } from '@edifice.io/react';
 
 import { matchPath } from 'react-router-dom';
 
