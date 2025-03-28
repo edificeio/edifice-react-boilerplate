@@ -43,3 +43,6 @@ Thumbs.db
 
 .env*
 *.tsbuildinfo
+
+# Scripts
+scripts/dev-tokens/config.json
