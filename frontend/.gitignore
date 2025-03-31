@@ -45,4 +45,4 @@ Thumbs.db
 *.tsbuildinfo
 
 # Scripts
-scripts/dev-tokens/config.json
+scripts/get-tokens/config.json

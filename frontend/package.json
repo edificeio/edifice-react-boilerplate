@@ -9,7 +9,7 @@
     "build": "vite build",
     "dev": "vite",
     "format": "prettier --write .",
-    "getTokens": "node scripts/dev-tokens/index.cjs",
+    "get-tokens": "node scripts/get-tokens/index.cjs",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "prepare": "cd .. && husky frontend/.husky || true",
