@@ -25,7 +25,9 @@ async function initialiserConfig() {
   }
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-  console.log('✅ Configuration mise à jour !');
+  console.log(
+    `✅ Configuration mise à jour ! Recette sélectionnée : ${config.recettes[0]}`,
+  );
 }
 
 async function choisirProfil() {
@@ -37,17 +39,21 @@ async function choisirProfil() {
 
   const profilAnswer = await inquirer.prompt([
     {
-      type: "list",
-      name: "profilIndex",
-      message: "📌 Sélectionnez un profil :",
+      type: 'list',
+      name: 'profilIndex',
+      message: '📌 Sélectionnez un profil :',
       choices: profiles,
     },
   ]);
 
-  if (profilAnswer.profilIndex === "new") {
+  if (profilAnswer.profilIndex === 'new') {
     const newProfil = await inquirer.prompt([
-      { type: "input", name: "login", message: "🆕 Entrez le login :" },
-      { type: "password", name: "password", message: "🔒 Entrez le mot de passe :" },
+      { type: 'input', name: 'login', message: '🆕 Entrez le login :' },
+      {
+        type: 'password',
+        name: 'password',
+        message: '🔒 Entrez le mot de passe :',
+      },
     ]);
     config.profils.push(newProfil);
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
@@ -63,9 +69,21 @@ async function choisirProfil() {
   config = require(configPath); // Recharge la config après création
 
   // Sélection de la recette
-  let selectedRecette = config.recettes.length === 1
-    ? config.recettes[0]
-    : (await inquirer.prompt([{ type: "list", name: "recette", message: "📌 Sélectionnez une recette :", choices: config.recettes }])).recette;
+  let selectedRecette =
+    config.recettes.length === 1
+      ? config.recettes[0]
+      : (
+          await inquirer.prompt([
+            {
+              type: 'list',
+              name: 'recette',
+              message: '📌 Sélectionnez une recette :',
+              choices: config.recettes,
+            },
+          ])
+        ).recette;
+
+  console.log(`✅ Recette sélectionnée : ${selectedRecette}`);
 
   // Sélection du profil
   let selectedProfil = await choisirProfil();
@@ -76,10 +94,10 @@ async function choisirProfil() {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
-  await page.goto(selectedRecette, { waitUntil: "networkidle2" });
-  await page.type("#email", selectedProfil.login);
-  await page.type("#password", selectedProfil.password);
-  await page.click("button.flex-magnet-bottom-right");
+  await page.goto(selectedRecette, { waitUntil: 'networkidle2' });
+  await page.type('#email', selectedProfil.login);
+  await page.type('#password', selectedProfil.password);
+  await page.click('button.flex-magnet-bottom-right');
   await page.waitForNavigation().catch(() => {});
 
   const cookies = await page.cookies();
@@ -87,13 +105,17 @@ async function choisirProfil() {
   const sessionId = cookies.find((c) => c.name === 'oneSessionId')?.value || '';
 
   if (!xsrfToken || !sessionId) {
-    console.error("❌ Échec de la connexion. Vérifiez les identifiants et réessayez.");
+    console.error(
+      '❌ Échec de la connexion. Vérifiez les identifiants et réessayez.',
+    );
     await browser.close();
     return;
   }
 
   console.log('🔑 Connexion réussie, récupération des cookies...');
-  const envContent = `VITE_XSRF_TOKEN=${xsrfToken}\nVITE_ONE_SESSION_ID=${sessionId}\nVITE_RECETTE=${selectedRecette}\n`;
+  const now = new Date();
+  const timestamp = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+  const envContent = `# Connected as: ${selectedProfil.login}\n# Date: ${timestamp}\n\nVITE_XSRF_TOKEN=${xsrfToken}\nVITE_ONE_SESSION_ID=${sessionId}\nVITE_RECETTE=${selectedRecette}\n`;
   fs.writeFileSync('.env', envContent);
   console.log('✅ Cookies enregistrés dans .env');
   await browser.close();
