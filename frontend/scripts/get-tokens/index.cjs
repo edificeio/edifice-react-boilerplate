@@ -134,7 +134,7 @@ async function choisirProfil() {
         '❌ Échec de la connexion. Vérifiez les identifiants et réessayez.',
       );
       await browser.close();
-      return;
+      process.exit(1);
     }
 
     console.log('🔑 Connexion réussie, récupération des cookies...');
