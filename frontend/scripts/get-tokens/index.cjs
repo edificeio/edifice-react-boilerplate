@@ -5,6 +5,29 @@ const configPath = `${__dirname}/config.json`;
 
 const isAutoMode = process.argv.includes('--auto');
 
+let browser;
+
+// Ctrl+C
+process.on('SIGINT', async () => {
+  console.log('🚨 Signal SIGINT détecté. Fermeture de Puppeteer...');
+
+  if (browser) {
+    await browser.close(); // Ferme le navigateur Puppeteer proprement
+    console.log('✅ Puppeteer fermé.');
+  }
+
+  process.exit(0); // Quitte le processus proprement
+});
+
+(async () => {
+  browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
+  // Ton code Puppeteer ici...
+
+  console.log("🔄 Puppeteer en cours d'exécution...");
+})();
+
 // Vérification et création de config.json si nécessaire
 if (!fs.existsSync(configPath)) {
   console.log('⚠️  Aucun fichier config.json trouvé. Création en cours...');
