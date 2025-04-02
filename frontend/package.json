@@ -8,10 +8,12 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "dev:fast": "pnpm get-tokens --auto && vite",
     "format": "prettier --write .",
     "get-tokens": "node scripts/get-tokens/index.cjs",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
+    "predev": "pnpm get-tokens",
     "prepare": "cd .. && husky frontend/.husky || true",
     "preview": "vite preview",
     "test": "vitest",
@@ -82,7 +84,7 @@
   },
   "packageManager": "pnpm@9.12.2",
   "engines": {
-    "node": "20"
+    "node": ">=20"
   },
   "nx": {}
 }
