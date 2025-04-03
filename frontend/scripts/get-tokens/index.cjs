@@ -4,31 +4,18 @@ const inquirer = require('inquirer');
 const configPath = `${__dirname}/config.json`;
 
 const isAutoMode = process.argv.includes('--auto');
-
 let browser;
 
-// Ctrl+C
 process.on('SIGINT', async () => {
   console.log('🚨 Signal SIGINT détecté. Fermeture de Puppeteer...');
-
   if (browser) {
-    await browser.close(); // Ferme le navigateur Puppeteer proprement
+    await browser.close();
     console.log('✅ Puppeteer fermé.');
   }
-
-  process.exit(0); // Quitte le processus proprement
+  process.exit(0);
 });
 
-(async () => {
-  browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  // Ton code Puppeteer ici...
-
-  console.log("🔄 Puppeteer en cours d'exécution...");
-})();
-
-// Vérification et création de config.json si nécessaire
+// Create config.json if needed
 if (!fs.existsSync(configPath)) {
   console.log('⚠️  Aucun fichier config.json trouvé. Création en cours...');
   fs.writeFileSync(
@@ -61,10 +48,8 @@ async function initialiserConfig() {
 }
 
 async function choisirProfil() {
-  // Si aucun profil n'existe ou en mode auto, on en crée un ou on prend le premier profil
   if (config.profils.length === 0 || isAutoMode) {
     if (config.profils.length === 0) {
-      // Si aucun profil n'existe, on en crée un
       const newProfil = await inquirer.prompt([
         { type: 'input', name: 'login', message: '🆕 Entrez le login :' },
         {
@@ -75,12 +60,9 @@ async function choisirProfil() {
       ]);
       return newProfil;
     }
-
-    // Si en mode auto et des profils existent, on sélectionne le premier profil
-    return config.profils[0];
+    return config.profils[0]; // Auto-mode
   }
 
-  // Si plusieurs profils existent, on demande à l'utilisateur de choisir ou d'en ajouter un
   const profiles = config.profils.map((profil, index) => ({
     name: profil.login,
     value: index,
@@ -97,7 +79,7 @@ async function choisirProfil() {
   ]);
 
   if (profilAnswer.profilIndex === 'new') {
-    const newProfil = await inquirer.prompt([
+    return await inquirer.prompt([
       { type: 'input', name: 'login', message: '🆕 Entrez le login :' },
       {
         type: 'password',
@@ -105,42 +87,40 @@ async function choisirProfil() {
         message: '🔒 Entrez le mot de passe :',
       },
     ]);
-    return newProfil;
   }
 
   return config.profils[profilAnswer.profilIndex];
 }
 
 (async () => {
-  await initialiserConfig();
-  config = require(configPath); // Recharge la config après mise à jour
-
-  let selectedRecette;
-  if (config.recettes.length === 1 || isAutoMode) {
-    selectedRecette = config.recettes[0];
-    console.log(`✅ Recette sélectionnée automatiquement : ${selectedRecette}`);
-  } else {
-    selectedRecette = (
-      await inquirer.prompt([
-        {
-          type: 'list',
-          name: 'recette',
-          message: '📌 Sélectionnez une recette :',
-          choices: config.recettes,
-        },
-      ])
-    ).recette;
-  }
-
-  let selectedProfil = await choisirProfil();
-
-  console.log(
-    `🌍 Connexion en tant que ${selectedProfil.login} sur ${selectedRecette}`,
-  );
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
-
   try {
+    await initialiserConfig();
+    config = require(configPath);
+
+    let selectedRecette =
+      config.recettes.length === 1 || isAutoMode
+        ? config.recettes[0]
+        : (
+            await inquirer.prompt([
+              {
+                type: 'list',
+                name: 'recette',
+                message: '📌 Sélectionnez une recette :',
+                choices: config.recettes,
+              },
+            ])
+          ).recette;
+
+    console.log(`✅ Recette sélectionnée : ${selectedRecette}`);
+
+    let selectedProfil = await choisirProfil();
+    console.log(
+      `🌍 Connexion en tant que ${selectedProfil.login} sur ${selectedRecette}`,
+    );
+
+    browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
     await page.goto(selectedRecette, { waitUntil: 'networkidle2' });
     await page.type('#email', selectedProfil.login);
     await page.type('#password', selectedProfil.password);
@@ -167,11 +147,10 @@ async function choisirProfil() {
     fs.writeFileSync('.env', envContent);
     console.log('✅ Cookies enregistrés dans .env');
 
-    // Ajout du profil dans la configuration seulement si la connexion a réussi
-    const profilExists = config.profils.some(
-      (profil) => profil.login === selectedProfil.login,
-    );
-    if (!profilExists && !isAutoMode) {
+    if (
+      !config.profils.some((profil) => profil.login === selectedProfil.login) &&
+      !isAutoMode
+    ) {
       console.log('🔑 Nouveau profil ajouté à la configuration.');
       config.profils.push(selectedProfil);
       fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
@@ -179,6 +158,10 @@ async function choisirProfil() {
   } catch (error) {
     console.error('❌ Une erreur est survenue lors de la connexion:', error);
   } finally {
-    await browser.close();
+    if (browser) {
+      await browser.close();
+      console.log('✅ Navigateur Puppeteer fermé.');
+    }
+    process.exit(0);
   }
 })();
