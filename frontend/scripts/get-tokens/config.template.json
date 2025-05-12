@@ -1,8 +1,5 @@
 {
-    "recettes": [
-      "https://recette-url1.com/",
-      "https://recette-url2.com/"
-    ],
+    "recettes": ["https://recette-url1.com", "https://recette-url2.com"],
     "profils": [
       {
         "login": "login.1",

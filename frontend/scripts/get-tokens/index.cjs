@@ -1,19 +1,10 @@
 const fs = require('fs');
-const { chromium } = require('playwright');
+const fetch = require('node-fetch');
 const inquirer = require('inquirer');
+const { URLSearchParams } = require('url');
 const configPath = `${__dirname}/config.json`;
 
 const isAutoMode = process.argv.includes('--auto');
-let browser;
-
-process.on('SIGINT', async () => {
-  console.log('🚨 Signal SIGINT détecté. Fermeture de Playwright...');
-  if (browser) {
-    await browser.close();
-    console.log('✅ Playwright fermé.');
-  }
-  process.exit(0);
-});
 
 if (!fs.existsSync(configPath)) {
   console.log('⚠️  Aucun fichier config.json trouvé. Création en cours...');
@@ -26,7 +17,7 @@ if (!fs.existsSync(configPath)) {
 
 let config = require(configPath);
 
-async function initialiserConfig() {
+async function initConfig() {
   if (!config.recettes || config.recettes.length === 0) {
     if (isAutoMode) {
       console.error(
@@ -93,7 +84,7 @@ async function choisirProfil() {
 
 (async () => {
   try {
-    await initialiserConfig();
+    await initConfig();
     config = require(configPath);
 
     let selectedRecette =
@@ -110,6 +101,10 @@ async function choisirProfil() {
             ])
           ).recette;
 
+    selectedRecette = selectedRecette.endsWith('/')
+      ? selectedRecette.slice(0, -1)
+      : selectedRecette;
+
     console.log(`✅ Recette sélectionnée : ${selectedRecette}`);
 
     let selectedProfil = await choisirProfil();
@@ -117,39 +112,47 @@ async function choisirProfil() {
       `🌍 Connexion en tant que ${selectedProfil.login} sur ${selectedRecette}`,
     );
 
-    browser = await chromium.launch({ headless: true });
-    const context = await browser.newContext();
-    const page = await context.newPage();
+    const payload = new URLSearchParams({
+      email: selectedProfil.login,
+      password: selectedProfil.password,
+      callBack: `${selectedRecette}/timeline/timeline`,
+      details: '',
+      rememberMe: 'true',
+    });
 
-    await page.goto(selectedRecette, { waitUntil: 'networkidle' });
+    const res = await fetch(`${selectedRecette}/auth/login`, {
+      method: 'POST',
+      body: payload,
+      redirect: 'manual',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-    await page.fill('#email', selectedProfil.login);
-    await page.fill('#password', selectedProfil.password);
-    await page.click('button.flex-magnet-bottom-right');
-
-    try {
-      await page.waitForSelector('.avatar', { timeout: 10000 });
-    } catch (e) {
-      console.log('⏳ Temps de navigation dépassé, on continue...');
+    const rawCookies = res.headers.raw()['set-cookie'];
+    if (!rawCookies) {
+      console.error('❌ Aucun cookie reçu. Échec probable de la connexion.');
+      return;
     }
 
-    const cookies = await context.cookies();
-    const xsrfToken = cookies.find((c) => c.name === 'XSRF-TOKEN')?.value || '';
-    const sessionId =
-      cookies.find((c) => c.name === 'oneSessionId')?.value || '';
+    const xsrf = rawCookies
+      .find((c) => c.startsWith('XSRF-TOKEN='))
+      ?.split(';')[0]
+      .split('=')[1];
+    const session = rawCookies
+      .find((c) => c.startsWith('oneSessionId='))
+      ?.split(';')[0]
+      .split('=')[1];
 
-    if (!xsrfToken || !sessionId) {
-      console.error(
-        '❌ Échec de la connexion. Vérifiez les identifiants et réessayez.',
-      );
-      await browser.close();
-      process.exit(1);
+    if (!xsrf || !session) {
+      console.error('❌ Cookies XSRF-TOKEN ou oneSessionId introuvables.');
+      return;
     }
 
     console.log('🔑 Connexion réussie, récupération des cookies...');
     const now = new Date();
     const timestamp = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
-    const envContent = `# Connected as: ${selectedProfil.login}\n# Date: ${timestamp}\n\nVITE_XSRF_TOKEN=${xsrfToken}\nVITE_ONE_SESSION_ID=${sessionId}\nVITE_RECETTE=${selectedRecette}\n`;
+    const envContent = `# Connected as: ${selectedProfil.login}\n# Date: ${timestamp}\n\nVITE_XSRF_TOKEN=${xsrf}\nVITE_ONE_SESSION_ID=${session}\nVITE_RECETTE=${selectedRecette}\n`;
     fs.writeFileSync('.env', envContent);
     console.log('✅ Cookies enregistrés dans .env');
 
@@ -164,10 +167,6 @@ async function choisirProfil() {
   } catch (error) {
     console.error('❌ Une erreur est survenue lors de la connexion:', error);
   } finally {
-    if (browser) {
-      await browser.close();
-      console.log('✅ Navigateur Playwright fermé.');
-    }
     process.exit(0);
   }
 })();
