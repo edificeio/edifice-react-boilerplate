@@ -45,6 +45,14 @@ const user = userEvent.setup();
 
 export const wrapper = MockedProviders;
 
+/**
+ * Renders a React component with custom wrapper and testing utilities
+ *
+ * @param ui - The React element to render
+ * @param options - Optional render options including routing path
+ * @param options.path - Optional path for router initial entries
+ * @returns Object containing user test utilities and render result
+ */
 const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions & { path: string }, 'wrapper'>,
