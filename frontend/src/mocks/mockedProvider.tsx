@@ -27,7 +27,7 @@ export const MockedProviders = ({
     <QueryClientProvider client={queryClient}>
       <EdificeClientProvider
         params={{
-          app: 'conversation',
+          app: 'boilerplate',
         }}
       >
         <MemoryRouter initialEntries={initialEntries || ['']}>
