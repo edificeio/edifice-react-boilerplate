@@ -8,9 +8,12 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "dev:fast": "pnpm get-tokens --auto && vite",
     "format": "prettier --write .",
+    "get-tokens": "node scripts/get-tokens/index.cjs",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
+    "predev": "pnpm get-tokens",
     "prepare": "cd .. && husky frontend/.husky || true",
     "preview": "vite preview",
     "test": "vitest",
@@ -30,9 +33,9 @@
     ]
   },
   "dependencies": {
-    "@edifice.io/react": "2.0.0",
     "@edifice.io/bootstrap": "2.0.0",
     "@edifice.io/client": "2.0.0",
+    "@edifice.io/react": "2.0.0",
     "@react-spring/web": "^9.7.5",
     "@tanstack/react-query": "5.62.7",
     "@uidotdev/usehooks": "2.4.1",
@@ -66,9 +69,11 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.11.0",
     "husky": "^9.1.6",
+    "inquirer": "^8.2.6",
     "jsdom": "^25.0.1",
     "lint-staged": "15.2.9",
     "msw": "^2.4.11",
+    "node-fetch": "^2.7.0",
     "nx": "19.6.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.3",
@@ -79,7 +84,7 @@
   },
   "packageManager": "pnpm@9.12.2",
   "engines": {
-    "node": "20"
+    "node": ">=20"
   },
   "nx": {}
 }
