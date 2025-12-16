@@ -3,6 +3,7 @@ import { RouteObject, createBrowserRouter } from 'react-router-dom';
 
 import { NotFound } from './errors/not-found';
 import { PageError } from './errors/page-error';
+import { manageRedirections } from './redirections';
 
 const routes = (queryClient: QueryClient): RouteObject[] => [
   /* Main route */
@@ -26,7 +27,15 @@ const routes = (queryClient: QueryClient): RouteObject[] => [
 
 export const basename = import.meta.env.PROD ? '/boilerplate' : '/';
 
-export const router = (queryClient: QueryClient) =>
-  createBrowserRouter(routes(queryClient), {
+export const router = (queryClient: QueryClient) => {
+  const redirectPath = manageRedirections();
+
+  if (redirectPath) {
+    const newUrl =
+      window.location.origin + basename.replace(/\/$/g, '') + redirectPath;
+    window.history.replaceState(null, '', newUrl);
+  }
+  return createBrowserRouter(routes(queryClient), {
     basename,
   });
+};
