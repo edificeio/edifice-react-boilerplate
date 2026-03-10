@@ -1,7 +1,7 @@
-/// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
-import { defineConfig, loadEnv, ProxyOptions } from 'vite';
+import { loadEnv, ProxyOptions } from 'vite';
+import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
@@ -103,11 +103,13 @@ export default ({ mode }: { mode: string }) => {
     },
 
     test: {
-      watch: false,
-      globals: true,
       environment: 'jsdom',
-      include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+      globals: true,
+      include: ['src/**/*.test.{ts,tsx}'],
       setupFiles: ['./src/mocks/setup.ts'],
+      watch: false,
+      clearMocks: true,
+      restoreMocks: true,
       reporters: ['default'],
       coverage: {
         reportsDirectory: './coverage/boilerplate',

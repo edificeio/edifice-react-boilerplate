@@ -13,7 +13,7 @@ import '@edifice.io/bootstrap/dist/index.css';
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement!);
 
-if (process.env.NODE_ENV !== 'production') {
+if (import.meta.env.DEV) {
   import('@axe-core/react').then((axe) => {
     axe.default(React, root, 1000);
   });
