@@ -2,7 +2,7 @@
  * DO NOT MODIFY
  */
 
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 import { RenderOptions, render } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { afterAll, afterEach, beforeAll } from 'vitest';
@@ -13,7 +13,7 @@ import { server } from './server';
 // Enable API mocking before tests.
 beforeAll(() =>
   server.listen({
-    onUnhandledRequest: 'bypass',
+    onUnhandledRequest: 'warn',
   }),
 );
 

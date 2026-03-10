@@ -10,7 +10,5 @@ describe('App', () => {
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Button');
-
-    screen.debug();
   });
 });

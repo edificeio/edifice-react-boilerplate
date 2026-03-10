@@ -25,7 +25,11 @@
       "~/*": ["src/*"],
       "@images/*": ["node_modules/@edifice.io/bootstrap/dist/images/*"]
     },
-    "types": ["vite/client"]
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@testing-library/jest-dom/vitest"
+    ]
   },
   "include": ["src"]
 }
