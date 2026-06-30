@@ -15,7 +15,7 @@ esac
 done
 
 if [ "$#" -lt 1 ]; then
-  echo "Usage: $0 <clean|init|localDep|build|install|watch>"
+  echo "Usage: $0 <clean|init|build|linkDependencies|cleanDependencies>"
   echo "Example: $0 clean"
   echo "Example: $0 init"
   echo "Example: $0 build"
@@ -59,9 +59,8 @@ clean () {
   rm -rf .nx
   rm -rf node_modules 
   rm -rf dist 
-  rm -rf build 
+  rm -rf build
   rm -rf .pnpm-store
-  # rm -f package.json 
   rm -f pnpm-lock.yaml
 }
 
@@ -96,10 +95,10 @@ linkDependencies () {
   fi
 
 
-  # # Extract dependencies from package.json using sed
+  # Extract dependencies from package.json using sed
   DEPENDENCIES=$(sed -n '/"dependencies": {/,/}/p' package.json | sed -n 's/ *"@edifice\.io\/\([^"]*\)":.*/\1/p')
 
-  # # Link each dependency if it exists in the edifice-frontend-framework
+  # Link each dependency if it exists in the edifice-frontend-framework
   for dep in $DEPENDENCIES; do
     # Handle special case for ts-client
     package_path="$PWD/../../edifice-frontend-framework/packages/$dep"
@@ -130,9 +129,9 @@ linkDependencies () {
     echo "ode-explorer not found in package.json"
   fi
 
-  # # Link the packages in the current application
+  # Link the packages in the current application
   echo "Linking packages in the current application..."
-  Link each dependency from package.json
+  # Link each dependency from package.json
   for dep in $DEPENDENCIES; do
     pnpm link --global "@edifice.io/$dep"
   done
