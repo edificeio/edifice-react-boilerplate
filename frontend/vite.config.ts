@@ -1,44 +1,25 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
-import { loadEnv, ProxyOptions } from 'vite';
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { createDevProxyConfig } from './vite/plugins/devProxy';
+import { serveLocalI18n } from './vite/plugins/serveLocalI18n';
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
-  // Checking environement files
-  const envFile = loadEnv(mode, process.cwd());
-  const envs = { ...process.env, ...envFile };
-  const hasEnvFile = Object.keys(envFile).length;
-
-  // Proxy variables
-  const headers = hasEnvFile
-    ? {
-        'set-cookie': [
-          `oneSessionId=${envs.VITE_ONE_SESSION_ID}`,
-          `XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}`,
-        ],
-        'Cache-Control': 'public, max-age=300',
-      }
-    : {};
-
-  const proxyObj: ProxyOptions = hasEnvFile
-    ? {
-        target: envs.VITE_RECETTE,
-        changeOrigin: true,
-        headers: {
-          cookie: `oneSessionId=${envs.VITE_ONE_SESSION_ID};authenticated=true; XSRF-TOKEN=${envs.VITE_XSRF_TOKEN}`,
-        },
-        configure: (proxy) => {
-          proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader('X-XSRF-TOKEN', envs.VITE_XSRF_TOKEN || '');
-          });
-        },
-      }
-    : {
-        target: 'http://localhost:8090',
-        changeOrigin: false,
-      };
+  const { headers, proxy } = createDevProxyConfig({
+    mode,
+    routes: [
+      '/applications-list',
+      '/conf/public',
+      '^/(?=help-1d|help-2d)',
+      '^/(?=assets)',
+      '^/(?=theme|locale|i18n|skin)',
+      '^/(?=auth|appregistry|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace|infra)',
+      '/explorer',
+      '/boilerplate',
+    ],
+  });
 
   return defineConfig({
     base: mode === 'production' ? '/boilerplate' : '',
@@ -62,17 +43,7 @@ export default ({ mode }: { mode: string }) => {
          */
         allow: ['../../'],
       },
-      proxy: {
-        '/applications-list': proxyObj,
-        '/conf/public': proxyObj,
-        '^/(?=help-1d|help-2d)': proxyObj,
-        '^/(?=assets)': proxyObj,
-        '^/(?=theme|locale|i18n|skin)': proxyObj,
-        '^/(?=auth|appregistry|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace|infra)':
-          proxyObj,
-        '/explorer': proxyObj,
-        '/boilerplate': proxyObj,
-      },
+      proxy,
       port: 4200,
       headers,
       host: 'localhost',
@@ -84,7 +55,17 @@ export default ({ mode }: { mode: string }) => {
       host: 'localhost',
     },
 
-    plugins: [react(), tsconfigPaths()],
+    plugins: [
+      serveLocalI18n({
+        route: '/boilerplate/i18n',
+        filePath: resolve(
+          __dirname,
+          '../backend/src/main/resources/i18n/fr.json',
+        ),
+      }),
+      react(),
+      tsconfigPaths(),
+    ],
 
     build: {
       outDir: './dist',

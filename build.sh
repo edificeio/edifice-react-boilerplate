@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Frontend
 cd frontend
@@ -13,5 +14,5 @@ cd backend
 ./build.sh --no-docker clean build
 cd ..
 
-# Clean up - remove frontend/dist and backend/src/main/resources
+# Clean up - remove frontend/dist
 rm -rf frontend/dist
