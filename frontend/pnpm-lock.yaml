@@ -16,15 +16,9 @@ importers:
       '@edifice.io/react':
         specifier: develop
         version: 2.5.4-develop.20251210193742(qy42tkngs3vd24lh6yergdhf5m)
-      '@react-spring/web':
-        specifier: 9.7.5
-        version: 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query':
         specifier: 5.90.21
         version: 5.90.21(react@18.3.1)
-      '@uidotdev/usehooks':
-        specifier: 2.4.1
-        version: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -34,18 +28,12 @@ importers:
       i18next-http-backend:
         specifier: 2.4.2
         version: 2.4.2
-      ode-explorer:
-        specifier: develop
-        version: 2.4.4-develop.202512102004(6y24mpp3ufqpeqguebi2mv2hdq)
       react:
         specifier: 18.3.1
         version: 18.3.1
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      react-error-boundary:
-        specifier: 4.0.13
-        version: 4.0.13(react@18.3.1)
       react-hook-form:
         specifier: 7.71.2
         version: 7.71.2(react@18.3.1)
@@ -434,15 +422,6 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
-
-  '@dnd-kit/modifiers@7.0.0':
-    resolution:
-      {
-        integrity: sha512-BG/ETy3eBjFap7+zIti53f0PCLGDzNXyTmn6fSdrudORf+OH04MxrW4p5+mPu4mgMk9kM41iYONjc3DOUWTcfg==,
-      }
-    peerDependencies:
-      '@dnd-kit/core': ^6.1.0
-      react: '>=16.8.0'
 
   '@dnd-kit/sortable@8.0.0':
     resolution:
@@ -1894,12 +1873,6 @@ packages:
         integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==,
       }
 
-  '@tanstack/query-core@5.62.7':
-    resolution:
-      {
-        integrity: sha512-fgpfmwatsrUal6V+8EC2cxZIQVl9xvL7qYa03gsdsCy985UTUlS4N+/3hCzwR0PclYDqisca2AqR1BVgJGpUDA==,
-      }
-
   '@tanstack/query-core@5.90.20':
     resolution:
       {
@@ -1919,14 +1892,6 @@ packages:
       }
     peerDependencies:
       '@tanstack/react-query': ^5.90.20
-      react: ^18 || ^19
-
-  '@tanstack/react-query@5.62.7':
-    resolution:
-      {
-        integrity: sha512-+xCtP4UAFDTlRTYyEjLx0sRtWyr5GIk7TZjZwBu4YaNahi3Rt2oMyRqfpfVrtwsqY2sayP4iXVCwmC+ZqqFmuw==,
-      }
-    peerDependencies:
       react: ^18 || ^19
 
   '@tanstack/react-query@5.90.21':
@@ -4858,13 +4823,6 @@ packages:
       }
     engines: { node: '>= 0.4' }
 
-  ode-explorer@2.4.4-develop.202512102004:
-    resolution:
-      {
-        integrity: sha512-IfeQ2vByTAFOi4qSxbyDRZZi3iFdD2FpenL0FxRw+9A/5XL9ulWXKLShEDI498SvDtTCti7PIv9c5R4Gfoxtyw==,
-      }
-    engines: { node: 18 || 20 }
-
   ohash@1.1.3:
     resolution:
       {
@@ -5617,14 +5575,6 @@ packages:
       }
     peerDependencies:
       react: ^18.3.1
-
-  react-error-boundary@4.0.13:
-    resolution:
-      {
-        integrity: sha512-b6PwbdSv8XeOSYvjt8LpgpKrZ0yGdtZokYwkwV2wlcZbxgopHX/hgPl5VgpnoVOWd868n1hktM8Qm4b+02MiLQ==,
-      }
-    peerDependencies:
-      react: '>=16.13.1'
 
   react-fast-compare@3.2.2:
     resolution:
@@ -7082,13 +7032,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.8.1
 
-  '@dnd-kit/modifiers@7.0.0(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      react: 18.3.1
-      tslib: 2.8.1
-
   '@dnd-kit/sortable@8.0.0(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -7129,112 +7072,6 @@ snapshots:
       '@popperjs/core': 2.11.8
       '@react-spring/web': 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query': 5.90.21(react@18.3.1)
-      '@tiptap/core': 2.11.0(@tiptap/pm@2.11.0)
-      '@tiptap/extension-blockquote': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-bullet-list': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-character-count': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-code': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-code-block': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-color': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/extension-text-style@2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0)))
-      '@tiptap/extension-dropcursor': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-focus': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-font-family': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/extension-text-style@2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0)))
-      '@tiptap/extension-gapcursor': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-hard-break': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-heading': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-highlight': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-history': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-horizontal-rule': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-image': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-italic': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-link': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-list-item': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-mathematics': 2.22.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)(katex@0.16.27)
-      '@tiptap/extension-ordered-list': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-placeholder': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-strike': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-subscript': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-superscript': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-table': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)
-      '@tiptap/extension-table-cell': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-table-header': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-table-row': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-text-align': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-text-style': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-typography': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/extension-underline': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
-      '@tiptap/pm': 2.11.0
-      '@tiptap/react': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))(@tiptap/pm@2.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tiptap/starter-kit': 2.11.0
-      '@uidotdev/usehooks': 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      antd: 5.29.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      clsx: 2.1.1
-      dayjs: 1.11.10
-      emoji-picker-react: 4.5.2(react@18.3.1)
-      html-react-parser: 4.2.1(react@18.3.1)
-      ohash: 1.1.3
-      pako: 2.1.0
-      pixi.js: 7.4.2
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-hook-form: 7.71.2(react@18.3.1)
-      react-hot-toast: 2.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-i18next: 14.1.0(i18next@23.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-intersection-observer: 9.5.3(react@18.3.1)
-      react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-slugify: 3.0.3
-      swiper: 10.3.1
-      ua-parser-js: 1.0.41
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - '@pixi/app'
-      - '@pixi/constants'
-      - '@pixi/core'
-      - '@pixi/display'
-      - '@pixi/extensions'
-      - '@pixi/graphics'
-      - '@pixi/math'
-      - '@pixi/mesh'
-      - '@pixi/mesh-extras'
-      - '@pixi/particle-container'
-      - '@pixi/sprite'
-      - '@pixi/sprite-animated'
-      - '@pixi/sprite-tiling'
-      - '@pixi/text'
-      - '@pixi/text-bitmap'
-      - '@pixi/ticker'
-      - '@types/node'
-      - date-fns
-      - katex
-      - less
-      - lightningcss
-      - luxon
-      - moment
-      - prop-types
-      - rollup
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - typescript
-
-  '@edifice.io/react@2.5.4-develop.20251210193742(vt2dxmkykatm2bjdkvljahlneq)':
-    dependencies:
-      '@ant-design/icons': 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/sortable': 8.0.0(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      '@edifice.io/bootstrap': 2.5.4-develop.20251210193742
-      '@edifice.io/tiptap-extensions': 2.5.4-develop.20251210193742(@types/node@18.19.55)(rollup@4.53.5)(typescript@5.9.3)
-      '@edifice.io/utilities': 2.5.4-develop.20251210193742
-      '@floating-ui/react': 0.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@pixi/mixin-get-child-by-name': 7.4.2(@pixi/display@7.4.2(@pixi/core@7.4.2))
-      '@pixi/react': 7.1.2(p7odtnnenfgvhs76mwyuql6w3u)
-      '@popperjs/core': 2.11.8
-      '@react-spring/web': 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tanstack/react-query': 5.62.7(react@18.3.1)
       '@tiptap/core': 2.11.0(@tiptap/pm@2.11.0)
       '@tiptap/extension-blockquote': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
       '@tiptap/extension-bullet-list': 2.11.0(@tiptap/core@2.11.0(@tiptap/pm@2.11.0))
@@ -8161,8 +7998,6 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@tanstack/query-core@5.62.7': {}
-
   '@tanstack/query-core@5.90.20': {}
 
   '@tanstack/query-devtools@5.93.0': {}
@@ -8171,11 +8006,6 @@ snapshots:
     dependencies:
       '@tanstack/query-devtools': 5.93.0
       '@tanstack/react-query': 5.90.21(react@18.3.1)
-      react: 18.3.1
-
-  '@tanstack/react-query@5.62.7(react@18.3.1)':
-    dependencies:
-      '@tanstack/query-core': 5.62.7
       react: 18.3.1
 
   '@tanstack/react-query@5.90.21(react@18.3.1)':
@@ -10000,66 +9830,6 @@ snapshots:
 
   object-inspect@1.13.4: {}
 
-  ode-explorer@2.4.4-develop.202512102004(6y24mpp3ufqpeqguebi2mv2hdq):
-    dependencies:
-      '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/modifiers': 7.0.0(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@edifice.io/bootstrap': 2.5.4-develop.20251210193742
-      '@edifice.io/client': 2.5.4-develop.20251210193742
-      '@edifice.io/react': 2.5.4-develop.20251210193742(vt2dxmkykatm2bjdkvljahlneq)
-      '@react-spring/web': 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tanstack/react-query': 5.62.7(react@18.3.1)
-      clsx: 2.1.1
-      dayjs: 1.11.10
-      i18next: 23.8.1
-      i18next-http-backend: 2.4.2
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-error-boundary: 4.0.13(react@18.3.1)
-      react-hook-form: 7.71.2(react@18.3.1)
-      react-i18next: 14.1.0(i18next@23.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-router-dom: 6.30.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      zustand: 4.5.7(@types/react@18.3.11)(react@18.3.1)
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - '@pixi/app'
-      - '@pixi/constants'
-      - '@pixi/core'
-      - '@pixi/display'
-      - '@pixi/extensions'
-      - '@pixi/graphics'
-      - '@pixi/math'
-      - '@pixi/mesh'
-      - '@pixi/mesh-extras'
-      - '@pixi/particle-container'
-      - '@pixi/sprite'
-      - '@pixi/sprite-animated'
-      - '@pixi/sprite-tiling'
-      - '@pixi/text'
-      - '@pixi/text-bitmap'
-      - '@pixi/ticker'
-      - '@types/node'
-      - '@types/react'
-      - date-fns
-      - debug
-      - encoding
-      - immer
-      - katex
-      - less
-      - lightningcss
-      - luxon
-      - moment
-      - prop-types
-      - react-native
-      - rollup
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - typescript
-
   ohash@1.1.3: {}
 
   once@1.4.0:
@@ -10675,11 +10445,6 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
-
-  react-error-boundary@4.0.13(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.28.4
-      react: 18.3.1
 
   react-fast-compare@3.2.2: {}
 
