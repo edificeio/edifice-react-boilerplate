@@ -1,9 +1,8 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import { createDevProxyConfig } from './vite/plugins/devProxy';
-import { serveLocalI18n } from './vite/plugins/serveLocalI18n';
+import { createDevProxyConfig } from './vite/plugins/devProxy.ts';
+import { serveLocalI18n } from './vite/plugins/serveLocalI18n.ts';
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
@@ -23,10 +22,11 @@ export default ({ mode }: { mode: string }) => {
 
   return defineConfig({
     base: mode === 'production' ? '/boilerplate' : '',
-    root: __dirname,
+    root: import.meta.dirname,
     cacheDir: './node_modules/.vite/boilerplate',
 
     resolve: {
+      tsconfigPaths: true,
       dedupe: [
         'react',
         'react-dom',
@@ -38,7 +38,7 @@ export default ({ mode }: { mode: string }) => {
       ],
       alias: {
         '@images': resolve(
-          __dirname,
+          import.meta.dirname,
           'node_modules/@edifice.io/bootstrap/dist/images',
         ),
       },
@@ -68,12 +68,11 @@ export default ({ mode }: { mode: string }) => {
       serveLocalI18n({
         route: '/boilerplate/i18n',
         filePath: resolve(
-          __dirname,
+          import.meta.dirname,
           '../backend/src/main/resources/i18n/fr.json',
         ),
       }),
       react(),
-      tsconfigPaths(),
     ],
 
     build: {
@@ -85,11 +84,6 @@ export default ({ mode }: { mode: string }) => {
       },
       assetsDir: 'public',
       chunkSizeWarningLimit: 4000,
-      rollupOptions: {
-        output: {
-          inlineDynamicImports: true,
-        },
-      },
     },
 
     test: {
