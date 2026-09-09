@@ -38,15 +38,14 @@ Gestionnaire de paquets : **pnpm@9.12.2**. Toujours l'utiliser, ne pas mélanger
 | But | Commande |
 | --- | --- |
 | Dev | `pnpm dev` <!-- vite, port 4200 --> |
-| Build | `pnpm build` <!-- vite build — ne type-check PAS, voir note ci-dessous --> |
+| Build | `pnpm build` <!-- typecheck && vite build --> |
+| Typecheck | `pnpm typecheck` <!-- tsc -b --noEmit --> |
 | Tests | `pnpm test` <!-- vitest --> |
 | Tests (couverture) | `pnpm test:coverage` |
 | Tests (UI) | `pnpm test:ui` |
 | Lint | `pnpm lint` <!-- eslint . --> |
 | Format | `pnpm format` <!-- prettier --write . --> |
 | Preview | `pnpm preview` <!-- vite preview, port 4300 --> |
-
-> **Pas de script `typecheck`** dans ce gabarit — `pnpm build` ne fait que transpiler (Vite/Rolldown), il ne vérifie pas les types. Pour un typecheck explicite : `pnpm exec tsc --noEmit -p tsconfig.app.json`. D'autres apps de l'écosystème (ex. `blog`) ont un script `typecheck` et l'enchaînent dans `build` — à envisager ici si ça n'a pas déjà été fait.
 
 > Hooks **Husky + lint-staged** : le pre-commit formate/lint les fichiers modifiés (`**/*.{js,ts,tsx}` → eslint, `**/*` → prettier). Ne pas contourner (`--no-verify`) sans raison.
 
@@ -90,7 +89,7 @@ mocks/        # MSW (setup.ts + handlers.ts, tous deux « DO NOT MODIFY » en t�
 
 ## À faire / à éviter
 
-- ✅ Garder le build vert : `lint` + `test` avant de pousser (et le typecheck manuel tant qu'il n'est pas scripté, cf. plus haut).
+- ✅ Garder le build vert : `typecheck` + `lint` + `test` avant de pousser.
 - ✅ Après un fork, remplacer toutes les occurrences de `boilerplate` (base path, namespace i18n, `EdificeClientProvider`, scripts, `docker-compose.yml`/CI) par le nom réel de l'app.
 - ❌ Ne pas introduire un autre gestionnaire d'état / data-fetching que Zustand + React Query.
 - ❌ Ne pas hardcoder le base path : il vaut `/boilerplate` en prod, vide en dev.

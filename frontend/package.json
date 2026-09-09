@@ -6,7 +6,7 @@
   "author": "Edifice",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "pnpm run typecheck && vite build",
     "dev": "vite",
     "format": "prettier --write .",
     "lint": "eslint .",
@@ -17,7 +17,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc -b --noEmit"
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": "eslint --no-warn-ignored",

@@ -12,6 +12,13 @@ correspondante indique ce qui a changé et comment adapter votre fork.
 Première version suivie du gabarit — jusqu'ici resté en `0.0.0`, sans
 changelog. Ce lot de changements modernise l'ensemble du socle front.
 
+### Added
+
+- Script `typecheck` (`tsc -b --noEmit`), enchaîné dans `build` — jusqu'ici
+  `pnpm build` ne faisait que transpiler (Vite), sans vérifier les types.
+  Aligné sur la convention majoritaire de l'écosystème (10/15 apps l'ont,
+  9 l'enchaînent dans `build`).
+
 ### Changed
 
 - **Vite 5 → 8**, **Vitest 2 → 5** (et `@vitest/coverage-v8`, `@vitest/ui`),
