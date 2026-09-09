@@ -1,4 +1,15 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { HttpResponse, http } from 'msw';
+
+/** Local boilerplate i18n bundle, so translations resolve in component tests. */
+const boilerplateI18nPath = resolve(
+  process.cwd(),
+  '../backend/src/main/resources/i18n/fr.json',
+);
+const boilerplateI18n = existsSync(boilerplateI18nPath)
+  ? JSON.parse(readFileSync(boilerplateI18nPath, 'utf-8'))
+  : {};
 
 /**
  * DO NOT MODIFY
@@ -13,6 +24,10 @@ const defaultHandlers = [
   http.get('/i18n', () => {
     return HttpResponse.json({ status: 200 });
   }),
+
+  http.get('/boilerplate/i18n', () => HttpResponse.json(boilerplateI18n)),
+
+  http.get('/boilerplate/conf/public', () => HttpResponse.json({})),
 
   http.get('/userbook/api/person', () => {
     return HttpResponse.json({
