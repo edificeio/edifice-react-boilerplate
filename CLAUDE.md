@@ -33,7 +33,7 @@ CHANGELOG.md         # historique des évolutions du gabarit (pas de l'app fork�
 
 ## Commandes (depuis `frontend/`)
 
-Gestionnaire de paquets : **pnpm@9.12.2**. Toujours l'utiliser, ne pas mélanger avec npm/yarn.
+Gestionnaire de paquets : **pnpm@10.34.5** (champ `packageManager`, source unique de vérité — pnpm s'aligne dessus tout seul, et la CI le lit via `package_json_file`). Toujours l'utiliser, ne pas mélanger avec npm/yarn.
 
 | But | Commande |
 | --- | --- |
@@ -78,7 +78,8 @@ mocks/        # MSW (setup.ts + handlers.ts, tous deux « DO NOT MODIFY » en t�
 
 ## Node / infra
 
-- **Node ≥20.19.0 ou ≥22.12.0** requis (Vite 8/Rolldown). Image Docker de build : `opendigitaleducation/node:22-alpine-pnpm`. Node 24 dès qu'une image `node:24-alpine-pnpm` existe (pas encore publiée).
+- **Node ≥20.19.0 ou ≥22.12.0** requis (Vite 8/Rolldown). Image Docker de build : `opendigitaleducation/node:24-alpine-pnpm` (Node 24.21, pnpm 10.34.5), alignée avec `node-version: 24` dans la CI GitHub Actions.
+- **pnpm 10** bloque par défaut les scripts de lifecycle des dépendances (durcissement supply-chain). Ici 4 sont ignorés — `core-js`, `esbuild`, `msw`, `nx` — sans impact vérifié : l'esbuild concerné est un transitif du tooling de `@edifice.io/react` (notre build passe par Rolldown), et le postinstall de `msw` ne sert qu'au service worker navigateur, pas aux tests node. Si un fork a besoin d'en réautoriser un : `pnpm approve-builds`, qui écrit la liste dans `pnpm.onlyBuiltDependencies`.
 - `@edifice.io/react` (dist-tag `develop`) pin `react`/`react-dom` en `^18.3.1` et `react-i18next` en `^14.1.0` en peerDependencies — **ne pas** monter ces trois au-delà tant qu'il n'aura pas bougé (double copie physique sinon).
 
 ## Tests

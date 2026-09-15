@@ -26,10 +26,30 @@ changelog. Ce lot de changements modernise l'ensemble du socle front.
 - **Node ≥20.19.0 ou ≥22.12.0 requis** — Vite 8 embarque Rolldown (bundler en
   Rust) dont le binding natif ne fonctionne pas sur Node 20.18.x. L'image
   Docker de build (`frontend/docker-compose.yml`) passe de
-  `node:20-alpine-pnpm` à `node:22-alpine-pnpm`, ainsi que le
-  `node-version` du workflow GitHub Actions. **Node 24 dès qu'une image
-  `node:24-alpine-pnpm` sera publiée** (pas encore disponible à ce jour —
-  Node 22 est en Maintenance LTS jusqu'à avril 2027, donc pas bloquant).
+  `node:20-alpine-pnpm` à **`node:24-alpine-pnpm`** (Node 24.21), et le
+  workflow GitHub Actions à `node-version: 24`.
+- **pnpm 9.12.2 → 10.34.5** (`packageManager`), la version embarquée dans
+  l'image Node 24 — évite que pnpm se re-télécharge lui-même à chaque build.
+  Le lockfile est **inchangé** (`lockfileVersion: '9.0'`, diff nul), donc la
+  bascule est sans churn et réversible. Effet notable de pnpm 10 : les
+  scripts de lifecycle des dépendances ne sont **plus exécutés par défaut**
+  (durcissement supply-chain). Quatre sont ignorés ici — `core-js`,
+  `esbuild`, `msw`, `nx` — vérifié sans impact sur typecheck/build/test/lint
+  ni sur `nx test`. Pour en réautoriser un dans un fork :
+  `pnpm approve-builds`.
+- CI : `pnpm/action-setup` ne pin plus de version en dur (elle était à
+  `9.4.0`, désynchronisée du `packageManager`) et lit désormais
+  `frontend/package.json` — source unique de vérité.
+- ⚠️ **À savoir pour un fork qui utilise `@tiptap-pro`** : pnpm 10 n'expanse
+  plus les variables d'environnement dans les identifiants de registre issus
+  d'un `.npmrc` de projet (il est commité, donc le secret pourrait fuiter).
+  La ligne `//registry.tiptap.dev/:_authToken=${TIPTAP_PRO_TOKEN}` de
+  `frontend/.npmrc` est donc ignorée, et `build.sh` qui passe
+  `-e TIPTAP_PRO_TOKEN` au conteneur ne suffit plus. Sans impact ici (aucune
+  app de l'écosystème ne tire réellement de `registry.tiptap.dev`
+  aujourd'hui) ; si besoin, passer par un `~/.npmrc` utilisateur ou
+  `pnpm config set "//registry.tiptap.dev/:_authToken" <valeur>` — ce que
+  fait déjà le workflow GitHub Actions.
 - `vite-tsconfig-paths` remplacé par l'option native `resolve.tsconfigPaths:
   true` de Vite 8 (une dépendance en moins).
 - `eslint` 9 → 10, `@eslint/js` 9 → 10, `globals` 15 → 17,
