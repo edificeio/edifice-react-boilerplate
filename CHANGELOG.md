@@ -82,6 +82,10 @@ changelog. Ce lot de changements modernise l'ensemble du socle front.
   `prettier` 3.8 → 3.9, `typescript-eslint` 8.57 → 8.70,
   `@tanstack/react-query`/`-devtools`, `react-hook-form`, `@axe-core/react`,
   `@testing-library/react`, `@types/react`/`@types/react-dom` (patchs).
+- Proxy de dev (`vite.config.ts`) : ajoute `zendeskGuide` aux routes proxifiées
+  vers le portail. Aucune adaptation requise pour un fork.
+- `ReactQueryDevtools` (dev uniquement) : bouton repositionné en bas à gauche
+  (`buttonPosition: 'bottom-left'`) pour ne pas masquer l'UI en bas à droite.
 
 ### Removed
 

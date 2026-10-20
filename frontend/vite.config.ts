@@ -14,7 +14,7 @@ export default ({ mode }: { mode: string }) => {
       '^/(?=help-1d|help-2d)',
       '^/(?=assets)',
       '^/(?=theme|locale|i18n|skin)',
-      '^/(?=auth|appregistry|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace|infra)',
+      '^/(?=auth|appregistry|cas|userbook|directory|communication|conversation|portal|session|timeline|workspace|infra|zendeskGuide)',
       '/explorer',
       '/boilerplate',
     ],
