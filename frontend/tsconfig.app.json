@@ -20,12 +20,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"],
-      "@images/*": ["node_modules/@edifice.io/bootstrap/dist/images/*"]
+      "~/*": ["./src/*"],
+      "@images/*": ["./node_modules/@edifice.io/bootstrap/dist/images/*"]
     },
     "types": [
+      "node",
       "vite/client",
       "vitest/globals",
       "@testing-library/jest-dom/vitest"

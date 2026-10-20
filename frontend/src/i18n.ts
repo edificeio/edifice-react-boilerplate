@@ -8,13 +8,11 @@ i18n
   .init({
     backend: {
       loadPath: (_lngs: string[], namespaces: string[]) => {
-        const urls = namespaces.map((namespace: string) => {
-          if (namespace === 'common') {
-            return `/i18n`;
-          }
-          return `/${namespace}/i18n`;
-        });
-        return urls;
+        const [namespace] = namespaces;
+        if (namespace === 'common') {
+          return `/i18n`;
+        }
+        return `/${namespace}/i18n`;
       },
       parse: function (data: string) {
         return JSON.parse(data);
