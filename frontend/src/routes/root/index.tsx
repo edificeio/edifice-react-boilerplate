@@ -1,4 +1,4 @@
-import { Layout, LoadingScreen, useEdificeClient } from '@edifice.io/react';
+import { LoadingScreen, useEdificeClient, PageLayout } from '@edifice.io/react';
 
 /** Check old format URL and redirect if needed */
 export const loader = async () => {
@@ -10,7 +10,12 @@ export const Root = () => {
 
   if (!init) return <LoadingScreen position={false} />;
 
-  return init ? <Layout>Boilerplate</Layout> : null;
+  return init ? (
+    <PageLayout>
+      <PageLayout.Header />
+      Boilerplate
+    </PageLayout>
+  ) : null;
 };
 
 export default Root;
