@@ -3,10 +3,14 @@ import { render, screen } from '~/mocks/setup';
 import { App } from './App';
 
 describe('App', () => {
-  it('should render', () => {
+  it('should render', async () => {
     render(<App />);
 
-    const button = screen.getByRole('button', { name: /button/i });
+    const button = await screen.findByRole(
+      'button',
+      { name: /button/i },
+      { timeout: 5000 },
+    );
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Button');

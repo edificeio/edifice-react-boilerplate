@@ -20,12 +20,14 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - uses: pnpm/action-setup@v4
         id: pnpm-install
         with:
-          version: 9.4.0
+          # Pas de `version` : l'action lit le champ `packageManager`,
+          # qui reste la source unique de vérité.
+          package_json_file: frontend/package.json
           run_install: false
 
       - name: Generate .npmrc

@@ -4,8 +4,8 @@ Application React 18 + TypeScript + Vite de l'écosystème Edifice.
 
 ## Prérequis
 
-- Node `20`
-- pnpm `9.12.2` (voir `packageManager` dans `package.json`)
+- Node `>=20.19` ou `>=22.12` (voir `engines` dans `package.json`) — l'image de build est en Node 24
+- pnpm `10.34.5` (voir `packageManager` dans `package.json`)
 
 ## Démarrage
 
